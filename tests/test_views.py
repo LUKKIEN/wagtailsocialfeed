@@ -5,6 +5,7 @@ import json
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.utils.encoding import force_text
 
 from bs4 import BeautifulSoup
 from wagtailsocialfeed.models import ModeratedItem
@@ -127,7 +128,7 @@ class ModerateAllowViewTest(ModerateTestMixin, TestCase):
         # Test with missing data
         resp = self.client.post(self.url)
         self.assertEqual(resp.status_code, 400)
-        json_resp = json.loads(resp.content)
+        json_resp = json.loads(force_text(resp.content))
         self.assertEqual(
             json_resp['message'],
             'The original social feed post was not found in the POST data')

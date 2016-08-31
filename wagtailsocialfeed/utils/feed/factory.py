@@ -9,4 +9,5 @@ class FeedFactory(object):
             return TwitterFeed()
         if source == 'instagram':
             return InstagramFeed()
-        raise NotImplementedError("Feed class for type '{}' not available".format(source))
+        raise NotImplementedError(
+            "Feed class for type '{}' not available".format(source))

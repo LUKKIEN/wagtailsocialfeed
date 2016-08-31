@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import json
 
 from django.http import JsonResponse
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView

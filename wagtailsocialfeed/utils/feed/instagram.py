@@ -54,6 +54,6 @@ class InstagramFeed(AbstractFeed):
             except KeyError as e:
                 raise FeedError("No items could be found in the response")
 
-            return map(prepare_item, items)
+            return list(map(prepare_item, items))
 
         raise FeedError(resp.reason)

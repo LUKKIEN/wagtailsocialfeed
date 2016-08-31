@@ -6,6 +6,7 @@ from wagtailsocialfeed.utils.conf import get_socialfeed_setting
 
 logger = logging.getLogger('wagtailsocialfeed')
 
+
 class FeedError(Exception):
     pass
 
@@ -22,9 +23,9 @@ class AbstractFeed(object):
             logger.debug("Fetching data online")
             data = self.fetch_online(config=config, *args, **kwargs)
             logger.debug("Storing data in cache ({})".format(cache_key))
-            cache.set(cache_key, data, get_socialfeed_setting('CACHE_DURATION'))
+            cache.set(cache_key, data,
+                      get_socialfeed_setting('CACHE_DURATION'))
         return data
-
 
     def fetch_online(self, *args, **kwargs):
         raise NotImplementedError(

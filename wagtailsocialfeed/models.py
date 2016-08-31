@@ -12,6 +12,7 @@ from wagtail.wagtailcore.models import Page
 from .utils.feed.factory import FeedFactory
 from .managers import ModeratedItemManager
 
+
 @python_2_unicode_compatible
 class SocialFeedConfiguration(models.Model):
     FEED_CHOICES = (
@@ -19,8 +20,13 @@ class SocialFeedConfiguration(models.Model):
         ('instagram', _('Instagram')),
     )
 
-    source = models.CharField(_('Feed source'), max_length=100, choices=FEED_CHOICES, blank=False)
-    username = models.CharField(_('User to track'), max_length=255, blank=False)
+    source = models.CharField(_('Feed source'),
+                              max_length=100,
+                              choices=FEED_CHOICES,
+                              blank=False)
+    username = models.CharField(_('User to track'),
+                                max_length=255,
+                                blank=False)
     moderated = models.BooleanField(default=False)
 
     def __str__(self):
@@ -61,7 +67,8 @@ class SocialFeedPage(Page):
     ]
 
     def get_context(self, request, *args, **kwargs):
-        context = super(SocialFeedPage, self).get_context(request, *args, **kwargs)
+        context = super(SocialFeedPage,
+                        self).get_context(request, *args, **kwargs)
 
         if self.feedconfig.moderated:
             feed = self.feedconfig.moderated_items.all()

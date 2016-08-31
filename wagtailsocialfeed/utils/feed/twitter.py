@@ -8,17 +8,17 @@ from . import AbstractFeed
 
 
 def process_images(media_dict):
-        images = {}
-        if not media_dict:
-            return images
-        base_url = media_dict[0]['media_url_https']
-
-        # TODO: see if we can provide the width and height attributes as well
-        images['small'] = dict(url=base_url + ":small")
-        images['thumb'] = dict(url=base_url + ":thumb")
-        images['medium'] = dict(url=base_url + ":medium")
-        images['large'] = dict(url=base_url + ":large")
+    images = {}
+    if not media_dict:
         return images
+    base_url = media_dict[0]['media_url_https']
+
+    # TODO: see if we can provide the width and height attributes as well
+    images['small'] = dict(url=base_url + ":small")
+    images['thumb'] = dict(url=base_url + ":thumb")
+    images['medium'] = dict(url=base_url + ":medium")
+    images['large'] = dict(url=base_url + ":large")
+    return images
 
 
 def prepare_item(item):
@@ -30,8 +30,9 @@ def prepare_item(item):
     item['image'] = image
 
     # Use the dateutil parser because on some platforms
-    # python's own strptime doesn't support the %z directive
-    item['date'] = dateparser.parse(item.get('created_at'))  # '%a %b %d %H:%M:%S %z %Y'
+    # python's own strptime doesn't support the %z directive.
+    # Format: '%a %b %d %H:%M:%S %z %Y'
+    item['date'] = dateparser.parse(item.get('created_at'))
 
     return item
 
@@ -59,4 +60,4 @@ class TwitterFeed(AbstractFeed):
             trim_user=True,
             contributor_details=False,
             include_rts=False)
-        return map(prepare_item, tweets)
+        return list(map(prepare_item, tweets))
