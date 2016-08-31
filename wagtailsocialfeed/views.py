@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import json
 
 from django.http import JsonResponse
+from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
@@ -74,7 +75,7 @@ class ModerateAllowView(View):
         config = SocialFeedConfiguration.objects.get(pk=pk)
 
         if 'original' not in request.POST:
-            err = {'message': error_messages['no_original']}
+            err = {'message': six.text_type(error_messages['no_original'])}
             return JsonResponse(err, status=400)
 
         original = request.POST['original']
@@ -98,7 +99,7 @@ class ModerateRemoveView(View):
         try:
             item = config.moderated_items.get(external_id=post_id)
         except ModeratedItem.DoesNotExist:
-            err = {'message': error_messages['not_found']}
+            err = {'message': six.text_type(error_messages['not_found'])}
             return JsonResponse(err, status=404)
 
         item.delete()
