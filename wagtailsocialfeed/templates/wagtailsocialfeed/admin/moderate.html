@@ -1,0 +1,60 @@
+{% extends "wagtailadmin/generic/index.html" %}
+{% load i18n wagtailadmin_tags staticfiles %}
+
+{% block extra_css %}
+    {{ block.super }}
+     <link rel="stylesheet" href="{% static 'wagtailsocialfeed/css/admin/moderate-page.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'wagtailsocialfeed/js/admin/moderate.js' %}"></script>
+{% endblock %}
+
+
+{% block listing %}
+<table class="listing full-width" id="feeds">
+    <col width="5%" />
+    <col width="25%" />
+    <col width="45%" />
+    <col width="25%" />
+    <thead>
+        <tr class="index {% if not parent_page.live %} unpublished{% endif %} {% block parent_page_row_classname %}{% endblock %}">
+            <td class=""></td>
+            <td class="date">Date</td>
+            <td class="post">Post</td>
+            <td class="image">Image</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for post in feed %}
+        <tr>
+            <td class="status color-green {{ post.allowed|yesno:'allowed,' }}">
+                <div class="status-container">
+                    <i class="status-allowed icon icon-pick"></i>
+                    <div class="status-actions">
+                        <a class="action-remove" href="{% url 'wagtailsocialfeed:remove' pk=object.pk post_id=post.id %}"
+                           data-post_id="{{ post.id }}">Remove</a>
+                        <a class="action-allow" href="{% url 'wagtailsocialfeed:allow' pk=object.pk post_id=post.id %}"
+                           data-post_id="{{ post.id }}">Allow</a>
+                   </div>
+                   <input type="hidden" id="post_original_{{ post.id }}" value="{{ post.json }}">
+                </div>
+            </td>
+            <td class="date" valign="middle">
+                <h2>{{ post.date }}</h2>
+            </td>
+            <td class="post" valign="middle">
+                 {{ post.text }}
+            </td>
+            <td class="image" valign="middle">
+            {% if post.image.thumb %}
+                <img src="{{ post.image.thumb.url }}" />
+            {% endif %}
+            </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

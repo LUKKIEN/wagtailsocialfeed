@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+
+  <title>{{ self.title }}</title>
+</head>
+
+<body>
+  <ul>
+    {% for item in feed %}
+    <li>
+        {% if item.moderated %}
+            {% include 'wagtailsocialfeed/includes/feed_item.html' with item=item.get_content %}
+        {% else %}
+            {% include 'wagtailsocialfeed/includes/feed_item.html' %}
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

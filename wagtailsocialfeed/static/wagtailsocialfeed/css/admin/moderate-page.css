@@ -1,0 +1,53 @@
+td.status {
+    padding-left: 20px;
+}
+
+td.status .status-container {
+    position: relative;
+    text-align: center;
+}
+
+td.status i {
+    font-size: 2em;
+    color: #189370;
+    visibility: visible;
+}
+
+td.status:hover i {
+    visibility: hidden;
+}
+
+/*
+ * Specific status states
+ */
+td.status.allowed div.status-actions {
+    visibility: hidden;
+    position: relative;
+    top: -1.5em;
+    margin-top: 0px;
+    height: 0px;
+}
+
+
+td.status:not(.new-state):hover div.status-actions {
+    visibility: visible;
+}
+
+td.status.allowed.new-state:hover i {
+    visibility: visible;
+}
+
+td.status:not(.allowed) i {
+    display: none;
+}
+
+/*
+ * Action button states
+ */
+td.status:not(.allowed) .status-actions a.action-remove {
+    display: none;
+}
+
+td.status.allowed .status-actions a.action-allow {
+    display: none;
+}

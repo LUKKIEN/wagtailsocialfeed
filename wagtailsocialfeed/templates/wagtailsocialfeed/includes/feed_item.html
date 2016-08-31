@@ -1,0 +1,5 @@
+<p>{{ item.text }}</p>
+<span>{{ item.date }}</span>
+{% if item.image %}
+    <img src="{{ item.image.small.url }}" />
+{% endif %}
