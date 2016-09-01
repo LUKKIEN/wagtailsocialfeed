@@ -10,7 +10,7 @@ with open('CHANGELOG.rst') as changelog_file:
     changelog = changelog_file.read()
 
 install_requires = [
-    'wagtail>=1.5',
+    'wagtail>=1.6',
     'twython>=3.0,<4.0',
     'wagtailfontawesome>=1.0',
     'requests>=2.0',
