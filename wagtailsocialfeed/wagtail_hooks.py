@@ -37,7 +37,7 @@ class SocialFeedModerateMenu(Menu):
             self.config_menu_items[config.id] = \
                 self._create_moderate_menu_item(config)
 
-        self._registered_menu_items = self.config_menu_items.values()
+        self._registered_menu_items = list(self.config_menu_items.values())
         self.construct_hook_name = None
 
         post_save.connect(self._update_menu, sender=SocialFeedConfiguration)
