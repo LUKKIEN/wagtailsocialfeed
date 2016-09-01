@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -38,17 +38,13 @@ docs_require = [
 
 setup(
     name='wagtailsocialfeed',
-    version='0.1.0',
+    version='0.1.dev1',
     description="A Wagtail module that provides pages and content blocks to show social media feeds", # NOQA
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
     author_email='info@leguijtict.nl',
     url='https://github.com/LUKKIEN/wagtailsocialfeed',
-    packages=[
-        'wagtailsocialfeed',
-    ],
-    package_dir={'wagtailsocialfeed':
-                 'wagtailsocialfeed'},
+    packages=find_packages(exclude=['tests*']),
     include_package_data=True,
     install_requires=install_requires,
     license="",
