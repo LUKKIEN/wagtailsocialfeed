@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import logging
 
 from django.core.cache import cache
@@ -12,7 +14,7 @@ class FeedError(Exception):
 
 
 class AbstractFeed(object):
-    def get_feed(self, config, *args, **kwargs):
+    def get_feed(self, config, limit=0, *args, **kwargs):
         cls_name = self.__class__.__name__
         cache_key = 'socialfeed:{}:data:{}'.format(cls_name, config.id)
 
@@ -25,6 +27,9 @@ class AbstractFeed(object):
             logger.debug("Storing data in cache ({})".format(cache_key))
             cache.set(cache_key, data,
                       get_socialfeed_setting('CACHE_DURATION'))
+
+        if limit:
+            return data[:limit]
         return data
 
     def fetch_online(self, *args, **kwargs):

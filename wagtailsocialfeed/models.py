@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.models import Page
 
-from .utils.feed.factory import FeedFactory
+from .utils import get_feed
 from .managers import ModeratedItemManager
 
 
@@ -69,12 +69,5 @@ class SocialFeedPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super(SocialFeedPage,
                         self).get_context(request, *args, **kwargs)
-
-        if self.feedconfig.moderated:
-            feed = self.feedconfig.moderated_items.all()
-        else:
-            stream = FeedFactory.create(self.feedconfig.source)
-            feed = stream.get_feed(config=self.feedconfig, limit=20)
-
-        context['feed'] = feed
+        context['feed'] = get_feed(self.feedconfig)
         return context

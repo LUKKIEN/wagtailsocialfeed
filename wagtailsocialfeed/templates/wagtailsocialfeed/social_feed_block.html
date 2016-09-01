@@ -1,0 +1,7 @@
+{% for item in feed %}
+    {% if item.moderated %}
+        {% include 'wagtailsocialfeed/includes/feed_item.html' with item=item.get_content %}
+    {% else %}
+        {% include 'wagtailsocialfeed/includes/feed_item.html' %}
+    {% endif %}
+{% endfor %}
