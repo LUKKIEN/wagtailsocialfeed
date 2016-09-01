@@ -7,15 +7,13 @@ Tests for `wagtailsocialfeed.models`.
 from __future__ import unicode_literals
 
 import json
-import re
 
 from django.test import RequestFactory, TestCase
 from django.utils import six
 
-import responses
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
 
-from . import date_handler
+from . import date_handler, feed_response
 from .factories import SocialFeedConfigurationFactory, SocialFeedPageFactory
 
 
@@ -43,15 +41,8 @@ class TestSocialFeedPage(TestCase):
             source='twitter', username='wagtailcms')
         self.page = SocialFeedPageFactory.create(feedconfig=self.feedconfig)
 
-    @responses.activate
-    def test_serve(self):
-        with open('tests/fixtures/tweets.json', 'r') as tweets_file:
-            tweets = json.loads("".join(tweets_file.readlines()))
-
-        responses.add(responses.GET,
-                      re.compile('https?://api.twitter.com/.*'),
-                      json=tweets, status=200)
-
+    @feed_response('twitter')
+    def test_serve(self, tweets):
         request = self.factory.get('/pages/feed/')
         resp = self.page.serve(request)
         resp.render()
@@ -59,16 +50,10 @@ class TestSocialFeedPage(TestCase):
         self.assertIn('feed', resp.context_data)
         self.assertEqual(len(resp.context_data['feed']), 17)
 
-    @responses.activate
-    def test_serve_moderated(self):
+    @feed_response('twitter')
+    def test_serve_moderated(self, tweets):
         self.feedconfig.moderated = True
         self.feedconfig.save()
-
-        with open('tests/fixtures/tweets.json', 'r') as tweets_file:
-            tweets = json.loads("".join(tweets_file.readlines()))
-        responses.add(responses.GET,
-                      re.compile('https?://api.twitter.com/.*'),
-                      json=tweets, status=200)
 
         request = self.factory.get('/pages/feed/')
         resp = self.page.serve(request)
