@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from wagtailsocialfeed.models import ModeratedItem
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
 
-from . import date_handler, feed_response
+from . import feed_response
 from .factories import SocialFeedConfigurationFactory
 
 
@@ -88,7 +88,7 @@ class ModerateViewTest(ModerateTestMixin, TestCase):
     #     rows = soup.tbody.find_all('tr')
     #     columns = rows[0].find_all('td')
     #     post_id = tweets[0]['id']
-
+    #
     #     url_allow = reverse('wagtailsocialfeed:allow',
     #                         kwargs={'pk': self.feedconfig.id,
     #                                 'post_id': post_id})
@@ -104,7 +104,7 @@ class ModerateAllowViewTest(ModerateTestMixin, TestCase):
         self.post = self.items[0]
         self.url = reverse('wagtailsocialfeed:allow',
                            kwargs={'pk': self.feedconfig.id,
-                                   'post_id': self.post['id']})
+                                   'post_id': self.post.id})
 
     def test_post_permissions(self):
         resp = self.client.post(self.url)
@@ -135,7 +135,7 @@ class ModerateAllowViewTest(ModerateTestMixin, TestCase):
 
         # Now for the correct way
         data = {
-            'original': json.dumps(self.post, default=date_handler)
+            'original': self.post.serialize()
         }
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, 200)
@@ -154,11 +154,11 @@ class ModerateRemoveViewTest(ModerateTestMixin, TestCase):
         self.feed = FeedFactory.create('twitter')
         self.items = self.feed.get_items(self.feedconfig)
         self.post = self.items[0]
-        self.post_serialized = json.dumps(self.post, default=date_handler)
-        self.feedconfig.moderated_items.get_or_create_for(self.post_serialized)
+        self.feedconfig.moderated_items.get_or_create_for(
+            self.post.serialize())
         self.url = reverse('wagtailsocialfeed:remove',
                            kwargs={'pk': self.feedconfig.id,
-                                   'post_id': self.post['id']})
+                                   'post_id': self.post.id})
 
     def test_post_permissions(self):
         resp = self.client.post(self.url)

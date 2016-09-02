@@ -1,7 +1,5 @@
 from __future__ import absolute_import, unicode_literals
 
-import json
-
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.models import Page
 
+from .utils.feed.factory import FeedItemFactory
 from .utils import get_feed_items
 from .managers import ModeratedItemManager
 
@@ -53,7 +52,10 @@ class ModeratedItem(models.Model):
         ordering = ['-posted', ]
 
     def get_content(self):
-        return json.loads(self.content)
+        if not hasattr(self, '_feeditem'):
+            item_cls = FeedItemFactory.get_class(self.config.source)
+            self._feeditem = item_cls.from_moderated(self)
+        return self._feeditem
 
 
 class SocialFeedPage(Page):

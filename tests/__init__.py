@@ -7,13 +7,6 @@ from functools import wraps
 import responses
 
 
-def date_handler(obj):
-    if hasattr(obj, 'isoformat'):
-        return obj.isoformat()
-    else:
-        raise TypeError
-
-
 def _twitter(modifier):
     with open('tests/fixtures/tweets.json', 'r') as feed_file:
         feed = json.loads("".join(feed_file.readlines()))

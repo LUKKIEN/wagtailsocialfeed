@@ -38,7 +38,7 @@
                         <a class="action-allow" href="{% url 'wagtailsocialfeed:allow' pk=object.pk post_id=post.id %}"
                            data-post_id="{{ post.id }}">Allow</a>
                    </div>
-                   <input type="hidden" id="post_original_{{ post.id }}" value="{{ post.json }}">
+                   <input type="hidden" id="post_original_{{ post.id }}" value="{{ post.serialize }}">
                 </div>
             </td>
             <td class="date" valign="middle">

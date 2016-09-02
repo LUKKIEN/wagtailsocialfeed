@@ -6,14 +6,12 @@ Tests for `wagtailsocialfeed.models`.
 """
 from __future__ import unicode_literals
 
-import json
-
 from django.test import RequestFactory, TestCase
 from django.utils import six
 
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
 
-from . import date_handler, feed_response
+from . import feed_response
 from .factories import SocialFeedConfigurationFactory, SocialFeedPageFactory
 
 
@@ -66,7 +64,7 @@ class TestSocialFeedPage(TestCase):
         items = feed.get_items(self.feedconfig)
         for item in items[:3]:
             self.feedconfig.moderated_items.get_or_create_for(
-                json.dumps(item, default=date_handler))
+                item.serialize())
 
         resp = self.page.serve(request)
         resp.render()

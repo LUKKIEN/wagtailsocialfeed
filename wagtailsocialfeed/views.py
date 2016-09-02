@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
 
-import json
-
 from django.http import JsonResponse
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
@@ -11,13 +9,6 @@ from django.views.generic.detail import DetailView
 
 from .models import ModeratedItem, SocialFeedConfiguration
 from .utils.feed.factory import FeedFactory
-
-
-def date_handler(obj):
-    if hasattr(obj, 'isoformat'):
-        return obj.isoformat()
-    else:
-        raise TypeError
 
 
 class ModerateView(DetailView):
@@ -43,17 +34,9 @@ class ModerateView(DetailView):
             allowed_ids = self.object.moderated_items.values_list(
                 'external_id', flat=True)
             for item in items:
-                # Provide JSON dump of the original item.
-                # This is passed on along with the 'allow' POST action so that
-                # we have the original post available without having to look
-                # into the cache (might not be there) or request it from the
-                # feed source again.
-                item_json = json.dumps(item, default=date_handler)
-                item['json'] = item_json
-
                 # Flag to see if this item is already allowed in
                 # the feed or not
-                item['allowed'] = item['id'] in allowed_ids
+                item.allowed = item.id in allowed_ids
 
         context['feed'] = items
 

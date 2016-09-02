@@ -15,11 +15,11 @@ class ModeratedItemManager(models.Manager):
         """
         original_obj = json.loads(original_post)
 
-        created = dateutil.parser.parse(original_obj['date'])
+        posted = dateutil.parser.parse(original_obj['posted'])
         external_id = original_obj['id']
         return self.get_or_create(
             external_id=external_id,
             defaults=dict(
-                posted=created,
+                posted=posted,
                 external_id=external_id,
                 content=original_post))

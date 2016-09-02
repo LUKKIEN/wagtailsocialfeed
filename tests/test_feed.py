@@ -5,7 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase, override_settings
 from django.utils import timezone
 
-from wagtailsocialfeed.utils.feed import AbstractFeed, FeedError
+from wagtailsocialfeed.utils.feed import AbstractFeed, FeedError, FeedItem
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
 from wagtailsocialfeed.utils.feed.instagram import InstagramFeed
 from wagtailsocialfeed.utils.feed.twitter import TwitterFeed
@@ -52,25 +52,22 @@ class TwitterFeedTest(TestCase):
         self.assertIsNotNone(cache.get(self.cache_key))
         self.assertEqual(len(stream), 17)
         for item in stream:
-            self.assertIn('date', item)
-            self.assertIn('id', item)
-            self.assertIn('text', item)
-            self.assertIn('image', item)
+            assert isinstance(item, FeedItem)
         self.assertEqual(
-            stream[0]['date'],
+            stream[0].posted,
             datetime.datetime(2016, 8, 9, 13, 16, 33, tzinfo=timezone.utc))
-        self.assertIsNone(stream[0]['image'])
+        self.assertIsNone(stream[0].image_dict)
 
-        self.assertIsNotNone(stream[-2]['image'])
+        self.assertIsNotNone(stream[-2].image_dict)
         base_url = 'https://pbs.twimg.com/media/CnpYVx0UkAEdCpU.jpg'
 
-        self.assertEqual(stream[-2]['image']['small']['url'],
+        self.assertEqual(stream[-2].image_dict['small']['url'],
                          base_url + ":small")
-        self.assertEqual(stream[-2]['image']['thumb']['url'],
+        self.assertEqual(stream[-2].image_dict['thumb']['url'],
                          base_url + ":thumb")
-        self.assertEqual(stream[-2]['image']['medium']['url'],
+        self.assertEqual(stream[-2].image_dict['medium']['url'],
                          base_url + ":medium")
-        self.assertEqual(stream[-2]['image']['large']['url'],
+        self.assertEqual(stream[-2].image_dict['large']['url'],
                          base_url + ":large")
 
     @override_settings(WAGTAIL_SOCIALFEED_CONFIG={})
@@ -110,28 +107,25 @@ class InstagramFeedTest(TestCase):
         self.assertEqual(len(stream), 20)
 
         for item in stream:
-            self.assertIn('date', item)
-            self.assertIn('id', item)
-            self.assertIn('text', item)
-            self.assertIn('image', item)
+            assert isinstance(item, FeedItem)
         self.assertEqual(
-            stream[0]['date'],
+            stream[0].posted,
             datetime.datetime(2016, 8, 17, 4, 31, 47, tzinfo=timezone.utc))
 
-        self.assertEqual(stream[0]['image']['small']['url'],
+        self.assertEqual(stream[0].image_dict['small']['url'],
                          "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s320x320/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
                          )
-        self.assertEqual(stream[0]['image']['thumb']['url'],
+        self.assertEqual(stream[0].image_dict['thumb']['url'],
                          "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s150x150/e35/c136.0.448.448/14032893_1190601567673451_1118658827_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.c" # NOQA
                          )
-        self.assertEqual(stream[0]['image']['medium']['url'],
+        self.assertEqual(stream[0].image_dict['medium']['url'],
                          "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
                          )
 
     @feed_response('instagram', modifier=_tamper_date)
     def test_feed_unexpected_date_format(self, feed):
         stream = self.stream.get_items(config=self.feedconfig)
-        self.assertIsNone(stream[0]['date'])
+        self.assertIsNone(stream[0].posted)
 
     @feed_response('instagram', modifier=_remove_items)
     def test_feed_unexpected_response(self, feed):

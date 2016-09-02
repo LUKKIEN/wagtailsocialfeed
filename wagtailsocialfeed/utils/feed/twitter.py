@@ -4,7 +4,27 @@ from twython import Twython
 
 from wagtailsocialfeed.utils.conf import get_socialfeed_setting
 
-from . import AbstractFeed
+from . import AbstractFeed, FeedItem
+
+
+class TwitterFeedItem(FeedItem):
+    @classmethod
+    def from_raw(cls, raw):
+        image = None
+        extended = raw.get('extended_entities', None)
+        if extended:
+            image = process_images(extended.get('media', None))
+
+        # Use the dateutil parser because on some platforms
+        # python's own strptime doesn't support the %z directive.
+        # Format: '%a %b %d %H:%M:%S %z %Y'
+        date = dateparser.parse(raw.get('created_at'))
+        return cls(
+            id=raw['id'],
+            text=raw['text'],
+            image_dict=image,
+            posted=date
+        )
 
 
 def process_images(media_dict):
@@ -19,22 +39,6 @@ def process_images(media_dict):
     images['medium'] = dict(url=base_url + ":medium")
     images['large'] = dict(url=base_url + ":large")
     return images
-
-
-def prepare_item(item):
-    image = None
-    extended = item.get('extended_entities', None)
-    if extended:
-        image = process_images(extended.get('media', None))
-
-    item['image'] = image
-
-    # Use the dateutil parser because on some platforms
-    # python's own strptime doesn't support the %z directive.
-    # Format: '%a %b %d %H:%M:%S %z %Y'
-    item['date'] = dateparser.parse(item.get('created_at'))
-
-    return item
 
 
 class TwitterFeed(AbstractFeed):
@@ -54,10 +58,11 @@ class TwitterFeed(AbstractFeed):
                           self.settings['CONSUMER_SECRET'],
                           self.settings['ACCESS_TOKEN_KEY'],
                           self.settings['ACCESS_TOKEN_SECRET'])
-
-        tweets = twitter.get_user_timeline(
+        return twitter.get_user_timeline(
             screen_name=username,
             trim_user=True,
             contributor_details=False,
             include_rts=False)
-        return list(map(prepare_item, tweets))
+
+    def to_feed_item(self, raw):
+        return TwitterFeedItem.from_raw(raw)
