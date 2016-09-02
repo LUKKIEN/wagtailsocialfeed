@@ -23,7 +23,7 @@ class AbstractFeedTest(TestCase):
 
     def test_fetch_online(self):
         with self.assertRaises(NotImplementedError):
-            self.feed.get_feed(self.feedconfig)
+            self.feed.get_items(self.feedconfig)
 
 
 class FeedFactoryTest(TestCase):
@@ -47,7 +47,7 @@ class TwitterFeedTest(TestCase):
     @feed_response('twitter')
     def test_feed(self, feed):
         self.assertIsNone(cache.get(self.cache_key))
-        stream = self.stream.get_feed(config=self.feedconfig)
+        stream = self.stream.get_items(config=self.feedconfig)
 
         self.assertIsNotNone(cache.get(self.cache_key))
         self.assertEqual(len(stream), 17)
@@ -104,7 +104,7 @@ class InstagramFeedTest(TestCase):
     @feed_response('instagram')
     def test_feed(self, feed):
         self.assertIsNone(cache.get(self.cache_key))
-        stream = self.stream.get_feed(config=self.feedconfig)
+        stream = self.stream.get_items(config=self.feedconfig)
 
         self.assertIsNotNone(cache.get(self.cache_key))
         self.assertEqual(len(stream), 20)
@@ -130,10 +130,10 @@ class InstagramFeedTest(TestCase):
 
     @feed_response('instagram', modifier=_tamper_date)
     def test_feed_unexpected_date_format(self, feed):
-        stream = self.stream.get_feed(config=self.feedconfig)
+        stream = self.stream.get_items(config=self.feedconfig)
         self.assertIsNone(stream[0]['date'])
 
     @feed_response('instagram', modifier=_remove_items)
     def test_feed_unexpected_response(self, feed):
         with self.assertRaises(FeedError):
-            self.stream.get_feed(config=self.feedconfig)
+            self.stream.get_items(config=self.feedconfig)

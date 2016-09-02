@@ -63,8 +63,8 @@ class TestSocialFeedPage(TestCase):
 
         # Now moderate some items
         feed = FeedFactory.create('twitter')
-        stream = feed.get_feed(self.feedconfig)
-        for item in stream[:3]:
+        items = feed.get_items(self.feedconfig)
+        for item in items[:3]:
             self.feedconfig.moderated_items.get_or_create_for(
                 json.dumps(item, default=date_handler))
 

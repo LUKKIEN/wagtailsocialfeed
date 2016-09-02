@@ -37,7 +37,7 @@ class ModerateView(DetailView):
         context = super(ModerateView, self).get_context_data(**kwargs)
 
         feed = FeedFactory.create(self.object.source)
-        items = feed.get_feed(config=self.object, limit=20)
+        items = feed.get_items(config=self.object, limit=20)
 
         if self.object.moderated:
             allowed_ids = self.object.moderated_items.values_list(

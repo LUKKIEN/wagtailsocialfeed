@@ -5,7 +5,7 @@ from django import forms
 from wagtail.wagtailcore import blocks
 
 from .models import SocialFeedConfiguration
-from .utils import get_feed
+from .utils import get_feed_items
 
 
 class FeedChooserBlock(blocks.ChooserBlock):
@@ -31,6 +31,6 @@ class SocialFeedBlock(blocks.StructBlock):
         context = super(SocialFeedBlock, self).get_context(value)
 
         feedconfig = value['feedconfig']
-        context['feed'] = get_feed(feedconfig, limit=value['limit'])
+        context['feed'] = get_feed_items(feedconfig, limit=value['limit'])
 
         return context

@@ -100,8 +100,8 @@ class ModerateAllowViewTest(ModerateTestMixin, TestCase):
     def setUp(self, tweets):
         super(ModerateAllowViewTest, self).setUp()
         self.feed = FeedFactory.create('twitter')
-        self.stream = self.feed.get_feed(self.feedconfig)
-        self.post = self.stream[0]
+        self.items = self.feed.get_items(self.feedconfig)
+        self.post = self.items[0]
         self.url = reverse('wagtailsocialfeed:allow',
                            kwargs={'pk': self.feedconfig.id,
                                    'post_id': self.post['id']})
@@ -152,8 +152,8 @@ class ModerateRemoveViewTest(ModerateTestMixin, TestCase):
     def setUp(self, tweets):
         super(ModerateRemoveViewTest, self).setUp()
         self.feed = FeedFactory.create('twitter')
-        self.stream = self.feed.get_feed(self.feedconfig)
-        self.post = self.stream[0]
+        self.items = self.feed.get_items(self.feedconfig)
+        self.post = self.items[0]
         self.post_serialized = json.dumps(self.post, default=date_handler)
         self.feedconfig.moderated_items.get_or_create_for(self.post_serialized)
         self.url = reverse('wagtailsocialfeed:remove',
