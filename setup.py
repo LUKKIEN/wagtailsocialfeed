@@ -29,6 +29,7 @@ test_require = [
     'PyYAML==3.11',
     'bumpversion==0.5.3',
     'wheel==0.29.0',
+    'django-coverage-plugin==1.3.1',
 ]
 
 docs_require = [
