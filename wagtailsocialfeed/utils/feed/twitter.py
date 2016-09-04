@@ -93,7 +93,7 @@ class TwitterFeed(AbstractFeed):
 
             oldest_post = raw[-1]
             if query_string:
-                raw = filter(_search, raw)
+                raw = list(filter(_search, raw))
             return raw, oldest_post
 
         raw, oldest_post = _fetch()

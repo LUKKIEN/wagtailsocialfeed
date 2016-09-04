@@ -1,10 +1,13 @@
 import datetime
+import json
+import re
 
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase, override_settings
 from django.utils import timezone
 
+import responses
 from wagtailsocialfeed.utils.feed import AbstractFeed, FeedError, FeedItem
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
 from wagtailsocialfeed.utils.feed.instagram import InstagramFeed
@@ -70,6 +73,40 @@ class TwitterFeedTest(TestCase):
         self.assertEqual(stream[-2].image_dict['large']['url'],
                          base_url + ":large")
 
+    @responses.activate
+    def test_search(self):
+        with open('tests/fixtures/twitter.json', 'r') as feed_file:
+            page1 = json.loads("".join(feed_file.readlines()))
+        with open('tests/fixtures/twitter.2.json', 'r') as feed_file:
+            page2 = json.loads("".join(feed_file.readlines()))
+
+        responses.add(responses.GET,
+                      re.compile('(?!.*max_id=\d*)https?://api.twitter.com.*'),
+                      json=page1, status=200)
+
+        responses.add(responses.GET,
+                      re.compile('(?=.*max_id=\d*)https?://api.twitter.com.*'),
+                      json=page2, status=200)
+
+        q = "CMS"
+        cache_key = "{}:q-{}".format(self.cache_key, q)
+
+        self.assertIsNone(cache.get(cache_key))
+        stream = self.stream.get_items(config=self.feedconfig,
+                                       query_string=q)
+        self.assertIsNotNone(cache.get(cache_key))
+        self.assertEqual(len(stream), 2)
+        for s in stream:
+            self.assertIn('CMS', s.text)
+
+    @feed_response('twitter')
+    def test_without_cache(self, feed):
+        self.assertIsNone(cache.get(self.cache_key))
+        stream = self.stream.get_items(config=self.feedconfig,
+                                       use_cache=False)
+        self.assertIsNone(cache.get(self.cache_key))
+        self.assertEqual(len(stream), 17)
+
     @override_settings(WAGTAIL_SOCIALFEED_CONFIG={})
     def test_configuration(self):
         with self.assertRaises(ImproperlyConfigured):
@@ -121,6 +158,34 @@ class InstagramFeedTest(TestCase):
         self.assertEqual(stream[0].image_dict['medium']['url'],
                          "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
                          )
+
+    @responses.activate
+    def test_search(self):
+        with open('tests/fixtures/instagram.json', 'r') as feed_file:
+            page1 = json.loads("".join(feed_file.readlines()))
+        with open('tests/fixtures/instagram.2.json', 'r') as feed_file:
+            page2 = json.loads("".join(feed_file.readlines()))
+
+        responses.add(
+            responses.GET,
+            re.compile('(?!.*max_id=\d*)https?://www.instagram.com.*'),
+            json=page1, status=200)
+
+        responses.add(
+            responses.GET,
+            re.compile('(?=.*max_id=\d*)https?://www.instagram.com.*'),
+            json=page2, status=200)
+
+        q = "programming"
+        cache_key = "{}:q-{}".format(self.cache_key, q)
+
+        self.assertIsNone(cache.get(cache_key))
+        stream = self.stream.get_items(config=self.feedconfig,
+                                       query_string=q)
+        self.assertIsNotNone(cache.get(cache_key))
+        self.assertEqual(len(stream), 39)
+        for s in stream:
+            self.assertIn('programming', s.text)
 
     @feed_response('instagram', modifier=_tamper_date)
     def test_feed_unexpected_date_format(self, feed):
