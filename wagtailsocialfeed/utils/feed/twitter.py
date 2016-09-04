@@ -91,12 +91,6 @@ class TwitterFeed(AbstractFeed):
             if not raw:
                 return raw, None
 
-            filename = "twitter.{}.json".format(self.iteration)
-            self.iteration += 1
-
-            with open(filename, 'wb') as output_file:
-                output_file.write(json.dumps(raw, indent=2))
-
             oldest_post = raw[-1]
             if query_string:
                 raw = filter(_search, raw)
