@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.1.dev2 (xxxx.xx.xx)
+0.1.dev2 (2016.09.04)
 ---------------------
 + Added block type 'SocialFeedBlock'
 + Added SocialFeedModerateMenu which live detects configuration changes

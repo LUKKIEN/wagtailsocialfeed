@@ -39,7 +39,7 @@ docs_require = [
 
 setup(
     name='wagtailsocialfeed',
-    version='0.1.dev1',
+    version='0.1.dev2',
     description="A Wagtail module that provides pages and content blocks to show social media feeds", # NOQA
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
