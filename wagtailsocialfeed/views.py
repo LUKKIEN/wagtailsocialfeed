@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 
+from wagtail.wagtailadmin.forms import SearchForm
+
 from .models import ModeratedItem, SocialFeedConfiguration
 from .utils.feed.factory import FeedFactory
 
@@ -24,11 +26,25 @@ class ModerateView(DetailView):
     template_name = 'wagtailsocialfeed/admin/moderate.html'
     queryset = SocialFeedConfiguration.objects.filter(moderated=True)
 
+    def get_search_form(self):
+        if 'q' in self.request.GET:
+            return SearchForm(self.request.GET, placeholder=_("Search posts"))
+        return SearchForm(placeholder=_("Search posts"))
+
     def get_context_data(self, **kwargs):
         context = super(ModerateView, self).get_context_data(**kwargs)
-
         feed = FeedFactory.create(self.object.source)
-        items = feed.get_items(config=self.object, limit=20)
+
+        form = self.get_search_form()
+        query_string = None
+        use_cache = True
+
+        if form.is_valid():
+            use_cache = False
+            query_string = form.cleaned_data['q']
+
+        items = feed.get_items(config=self.object, query_string=query_string,
+                               use_cache=use_cache)
 
         if self.object.moderated:
             allowed_ids = self.object.moderated_items.values_list(
@@ -39,6 +55,7 @@ class ModerateView(DetailView):
                 item.allowed = item.id in allowed_ids
 
         context['feed'] = items
+        context['search_form'] = form
 
         return context
 

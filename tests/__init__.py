@@ -8,7 +8,7 @@ import responses
 
 
 def _twitter(modifier):
-    with open('tests/fixtures/tweets.json', 'r') as feed_file:
+    with open('tests/fixtures/twitter.json', 'r') as feed_file:
         feed = json.loads("".join(feed_file.readlines()))
     if modifier:
         feed = modifier(feed)
