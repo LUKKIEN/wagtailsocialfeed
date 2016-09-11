@@ -10,4 +10,4 @@ Development Lead
 Contributors
 ------------
 
-* Janneke Janssen <j.janssen@lukkien.com>
+* Janneke Janssen

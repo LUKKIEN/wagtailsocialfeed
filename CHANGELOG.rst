@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.1.dev3 (2016.09.11)
+---------------------
++ Updated license model to BSD
+
 0.1.dev2 (2016.09.04)
 ---------------------
 + Added block type 'SocialFeedBlock'
