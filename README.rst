@@ -15,8 +15,6 @@ Wagtail Form Blocks
 
 A Wagtail module that provides pages and content blocks to show social media feeds
 
-
-* Free software: MIT license
 * Documentation: https://wagtailsocialfeed.readthedocs.io.
 
 
