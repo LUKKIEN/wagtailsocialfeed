@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+0.1.0 (2016.09.28)
+==================
++ Fixed PyPI long_description format error
++ Fixed value_for_form error in FeedChooserBlock
+
 0.1.dev4 (2016.09.27)
 =====================
 + Made looping over multiple result pages more DRY

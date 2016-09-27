@@ -14,6 +14,8 @@ class FeedChooserBlock(blocks.ChooserBlock):
 
     def value_for_form(self, value):
         if value:
+            if isinstance(value, int):
+                return value
             return value.pk
         return None
 
