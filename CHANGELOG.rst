@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.1.0 (xxxx.xx.xx)
+0.1.0 (2016.09.27)
 ==================
 + Fixed PyPI long_description format error
 + Fixed value_for_form error in FeedChooserBlock
