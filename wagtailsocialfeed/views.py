@@ -22,9 +22,11 @@ class ModerateView(DetailView):
     associated with them
     """
 
-    page_title = _('Moderating')
     template_name = 'wagtailsocialfeed/admin/moderate.html'
     queryset = SocialFeedConfiguration.objects.filter(moderated=True)
+
+    def page_title(self):
+        return _('Moderating {}').format(self.object)
 
     def get_search_form(self):
         if 'q' in self.request.GET:

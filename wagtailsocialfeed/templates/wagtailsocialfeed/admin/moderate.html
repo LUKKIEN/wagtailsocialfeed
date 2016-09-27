@@ -13,9 +13,8 @@
 
 
 {% block content %}
-    {% trans "Moderating" as mod_str %}
     {% url 'wagtailsocialfeed:moderate' pk=object.pk as search_url %}
-    {% include "wagtailsocialfeed/admin/header.html" with title=mod_str icon="rss" search_url=search_url %}
+    {% include "wagtailsocialfeed/admin/header.html" with title=view.page_title icon="rss" search_url=search_url %}
 
 <table class="listing full-width" id="feeds">
     <col width="5%" />
