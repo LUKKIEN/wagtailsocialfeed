@@ -34,11 +34,11 @@ class TestSocialFeedBlock(TestCase):
         html = block.render(value)
 
         self.assertEqual(len(context['feed']), 3)
-        self.assertIn("Please try out 1.6 on your staging sites ahead of the",
+        self.assertIn("snipcart our pleasure! also posted to",
                       html)
-        self.assertIn("Congratulations to Wagtail users @britishswimming!",
+        self.assertIn("&quot;It&#39;s elegant, flexible, and, IMHO, kicks ass&quot;",
                       html)
-        self.assertIn("When are *you* going to write a blog post for us?",
+        self.assertIn("@snipcart your new Wagtail + Snipcart tutorial is awesssssome",
                       html)
 
     def test_to_python(self):

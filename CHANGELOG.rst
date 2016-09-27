@@ -4,6 +4,7 @@ CHANGELOG
 
 0.1.dev4 (xxxx.xx.xx)
 ---------------------
++ Made looping over multiple result pages more DRY
 + Fixed AttributeError in FeedChooserBlock.value_for_form
 
 0.1.dev3 (2016.09.11)

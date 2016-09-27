@@ -3,8 +3,7 @@ import json
 import re
 
 from django.core.cache import cache
-from django.core.exceptions import ImproperlyConfigured
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.utils import timezone
 
 import responses
@@ -24,7 +23,7 @@ class AbstractFeedTest(TestCase):
             username='someuser')
         self.feed = AbstractFeed()
 
-    def test_fetch_online(self):
+    def test_get_items(self):
         with self.assertRaises(NotImplementedError):
             self.feed.get_items(self.feedconfig)
 
@@ -58,19 +57,19 @@ class TwitterFeedTest(TestCase):
             assert isinstance(item, FeedItem)
         self.assertEqual(
             stream[0].posted,
-            datetime.datetime(2016, 8, 9, 13, 16, 33, tzinfo=timezone.utc))
+            datetime.datetime(2016, 9, 23, 8, 28, 16, tzinfo=timezone.utc))
         self.assertIsNone(stream[0].image_dict)
 
-        self.assertIsNotNone(stream[-2].image_dict)
+        self.assertIsNotNone(stream[-1].image_dict)
         base_url = 'https://pbs.twimg.com/media/CnpYVx0UkAEdCpU.jpg'
 
-        self.assertEqual(stream[-2].image_dict['small']['url'],
+        self.assertEqual(stream[-1].image_dict['small']['url'],
                          base_url + ":small")
-        self.assertEqual(stream[-2].image_dict['thumb']['url'],
+        self.assertEqual(stream[-1].image_dict['thumb']['url'],
                          base_url + ":thumb")
-        self.assertEqual(stream[-2].image_dict['medium']['url'],
+        self.assertEqual(stream[-1].image_dict['medium']['url'],
                          base_url + ":medium")
-        self.assertEqual(stream[-2].image_dict['large']['url'],
+        self.assertEqual(stream[-1].image_dict['large']['url'],
                          base_url + ":large")
 
     @responses.activate
@@ -88,7 +87,7 @@ class TwitterFeedTest(TestCase):
                       re.compile('(?=.*max_id=\d*)https?://api.twitter.com.*'),
                       json=page2, status=200)
 
-        q = "CMS"
+        q = "release"
         cache_key = "{}:q-{}".format(self.cache_key, q)
 
         self.assertIsNone(cache.get(cache_key))
@@ -97,7 +96,7 @@ class TwitterFeedTest(TestCase):
         self.assertIsNotNone(cache.get(cache_key))
         self.assertEqual(len(stream), 2)
         for s in stream:
-            self.assertIn('CMS', s.text)
+            self.assertIn('release', s.text)
 
     @feed_response('twitter')
     def test_without_cache(self, feed):
@@ -106,11 +105,6 @@ class TwitterFeedTest(TestCase):
                                        use_cache=False)
         self.assertIsNone(cache.get(self.cache_key))
         self.assertEqual(len(stream), 17)
-
-    @override_settings(WAGTAIL_SOCIALFEED_CONFIG={})
-    def test_configuration(self):
-        with self.assertRaises(ImproperlyConfigured):
-            FeedFactory.create('twitter')
 
 
 def _tamper_date(resp):

@@ -57,6 +57,29 @@ class FeedItem(object):
         return cls(**source)
 
 
+class AbstractFeedQuery(object):
+    """
+    Query class to facilitate the actual fetch on the feed source.
+
+    Needs to have a source-specific implementation.
+    Once implemented for, say, twitter, it can be used as follows:
+
+        query = TwitterFeedQuery()
+        tweets = query()
+
+    or, in order to fetch some older tweets:
+
+        older_tweets = query(max_id=<some id>)
+    """
+
+    def __init__(self, username, query_string):
+        self.username = username
+        self.query_string = query_string
+
+    def __call__(self, max_id=None):
+        raise NotImplementedError('The __call__ function needs to be implemented to provide the core functionality')
+
+
 class AbstractFeed(object):
     """
     All feed implementations should subclass this class.
@@ -88,8 +111,7 @@ class AbstractFeed(object):
         else:
             logger.debug("Fetching data online")
 
-            data_raw = self.fetch_online(config=config, limit=limit,
-                                         query_string=query_string)
+            data_raw = self._fetch_online(config=config, query_string=query_string)
             data = list(map(self._convert_raw_item, data_raw))
 
             if use_cache:
@@ -101,7 +123,7 @@ class AbstractFeed(object):
             return data[:limit]
         return data
 
-    def more_history_allowed(self, oldest_date):
+    def _more_history_allowed(self, oldest_date):
         """
         Determine if we should load more history.
 
@@ -114,17 +136,58 @@ class AbstractFeed(object):
         last_allowed = now - get_socialfeed_setting('SEARCH_MAX_HISTORY')
         return oldest_date > last_allowed
 
-    def to_feed_item(self, raw):
-        raise NotImplementedError(
-            "to_feed_item() is not implemented yet by {}".format(
-                self.__class__.__name__))
+    def _fetch_online(self, config, query_string=None):
+        """
+        Fetch the data from the online source.
 
-    def fetch_online(self, config, limit=None, query_string=None):
-        raise NotImplementedError(
-            "fetch_online() is not implemented yet by {}".format(
-                self.__class__.__name__))
+        By default it will query just one result-page from the online source.
+        When a `query_string` is given, multiple pages can be retreived in order
+        to increase the changes of returning a usefull result-set.
+        The size of the history to be searched through is specified in `SEARCH_MAX_HISTORY`
+        (see `_more_history_allowed` for the specific implementation).
+
+        :param config: `SocialFeedConfiguration` to use
+        :param query_string: the search term to filter on (default=None)
+        """
+        if not hasattr(self, 'query_cls'):
+            raise NotImplementedError('query_cls needs to be defined')
+
+        query = self.query_cls(config.username, query_string)
+        raw, oldest_post = query()
+
+        if query_string:
+            # If we have a query_string, we should fetch the users timeline a
+            # couple of times to dig a bit into the history.
+            while oldest_post:
+                oldest_post_date = self.get_post_date(oldest_post)
+                if not self._more_history_allowed(oldest_post_date):
+                    break
+
+                _raw, _post = self.fetch_older_items(query=query, oldest_post=oldest_post)
+                if _post and _post['id'] == oldest_post['id']:
+                    logger.warning("Trying to fetch older items but received "
+                                   "same result set. Breaking the loop.")
+                    break
+                oldest_post = _post
+                raw += _raw
+
+        return raw
 
     def _convert_raw_item(self, raw):
-        item = self.to_feed_item(raw)
+        """Convert a raw data-dict into a FeedItem subclass."""
+        item = self.item_cls.from_raw(raw)
         assert isinstance(item, FeedItem)
         return item
+
+    def get_post_date(self, item):
+        """Get the post date of a specific item"""
+        raise NotImplementedError("get_post_date needs to be implemented")
+
+    def fetch_older_items(self, query, oldest_post):
+        """
+        Fetch older items from the online source.
+
+        This needs to be implemented by the specific feed classes because the way pages
+        (or max_id arguments) differ between specific social media sources.
+        """
+        raise NotImplementedError("fetch_older_items needs to be implemented")
