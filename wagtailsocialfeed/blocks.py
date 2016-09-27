@@ -13,7 +13,9 @@ class FeedChooserBlock(blocks.ChooserBlock):
     widget = forms.Select
 
     def value_for_form(self, value):
-        return value.pk
+        if value:
+            return value.pk
+        return None
 
     def to_python(self, value):
         return self.target_model.objects.get(pk=value)

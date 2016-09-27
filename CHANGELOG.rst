@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.1.dev4 (xxxx.xx.xx)
+---------------------
++ Fixed AttributeError in FeedChooserBlock.value_for_form
+
 0.1.dev3 (2016.09.11)
 ---------------------
 + Updated license model to BSD
