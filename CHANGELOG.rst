@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.1.dev4 (xxxx.xx.xx)
+0.1.dev4 (2016.09.27)
 ---------------------
 + Made looping over multiple result pages more DRY
 + Improved moderate page title

@@ -29,8 +29,10 @@ help:
 develop: clean ## install development env
 	pip install -e .[testing,docs]
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+clean: clean-build clean-pyc clean-test clean-docs ## remove all build, test, coverage and Python artifacts
 
+clean-docs:
+	rm -rf docs/_build
 
 clean-build: ## remove build artifacts
 	rm -fr build/
