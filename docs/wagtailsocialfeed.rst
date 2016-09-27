@@ -12,6 +12,14 @@ Subpackages
 Submodules
 ----------
 
+wagtailsocialfeed.blocks module
+-------------------------------
+
+.. automodule:: wagtailsocialfeed.blocks
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 wagtailsocialfeed.managers module
 ---------------------------------
 

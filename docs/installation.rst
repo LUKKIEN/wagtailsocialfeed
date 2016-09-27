@@ -49,12 +49,13 @@ Once you have a copy of the source, you can install it with:
 Configure Django
 ----------------
 
-Add ``wagtailsocialfeed`` to your ``INSTALLED_APPS`` in settings:
+Add ``wagtailsocialfeed`` and ``wagtail.contrib.modeladmin`` to your ``INSTALLED_APPS`` in settings:
 
 .. code-block:: python
 
     INSTALLED_APPS += [
         'wagtailsocialfeed',
+        'wagtail.contrib.modeladmin',
     ]
 
 

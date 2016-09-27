@@ -19,6 +19,19 @@ A Wagtail module that provides pages and content blocks to show social media fee
 
 
 Features
---------
+========
 
-* TODO
+* A wagtail settings sections to configure social media sources
+* Social feed moderate view
+* Social feed content block
+* Social feed Page type
+
+.. image:: http://i.imgur.com/BOXiAh6.png
+   :width: 728 px
+
+Implementations
+---------------
+At the moment, only two social media sources are supported.
+
+* Twitter
+* Instagram
