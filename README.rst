@@ -1,5 +1,5 @@
 ===============================
-Wagtail Form Blocks
+Wagtail Social Feed
 ===============================
 
 

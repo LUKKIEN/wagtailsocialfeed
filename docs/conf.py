@@ -213,7 +213,7 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
     ('index', 'wagtailsocialfeed.tex',
-     u'Wagtail Form Blocks Documentation',
+     u'Wagtail Social Feed Documentation',
      u'Tim Leguijt', 'manual'),
 ]
 
@@ -259,7 +259,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'wagtailsocialfeed',
-     u'Wagtail Form Blocks Documentation',
+     u'Wagtail Social Feed Documentation',
      u'Tim Leguijt',
      'wagtailsocialfeed',
      'One line description of project.',

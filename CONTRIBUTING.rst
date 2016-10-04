@@ -38,8 +38,8 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-Wagtail Form Blocks could always use more documentation, whether as part of the
-official Wagtail Form Blocks docs, in docstrings, or even on the web in blog posts,
+Wagtail Social Feed could always use more documentation, whether as part of the
+official Wagtail Social Feed docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
