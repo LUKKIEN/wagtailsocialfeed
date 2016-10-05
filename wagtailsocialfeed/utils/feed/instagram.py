@@ -41,6 +41,7 @@ class InstagramFeedItem(FeedItem):
 
         return cls(
             id=raw['id'],
+            type='instagram',
             text=raw['caption']['text'],
             image_dict=image,
             posted=date,

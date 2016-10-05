@@ -1,15 +1,15 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
+from django.utils.six import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.models import Page
 
-from .utils.feed.factory import FeedItemFactory
-from .utils import get_feed_items
 from .managers import ModeratedItemManager
+from .utils import get_feed_items, get_feed_items_mix
+from .utils.feed.factory import FeedItemFactory
 
 
 @python_2_unicode_compatible
@@ -35,6 +35,7 @@ class SocialFeedConfiguration(models.Model):
         return "{} ({})".format(self.source, name)
 
 
+@python_2_unicode_compatible
 class ModeratedItem(models.Model):
     config = models.ForeignKey(SocialFeedConfiguration,
                                related_name='moderated_items',
@@ -51,18 +52,31 @@ class ModeratedItem(models.Model):
     class Meta:
         ordering = ['-posted', ]
 
+    def __str__(self):
+        return "{}<{}> ({} posted {})".format(
+            self.__class__.__name__,
+            self.type,
+            self.external_id,
+            self.posted
+        )
+
     def get_content(self):
         if not hasattr(self, '_feeditem'):
             item_cls = FeedItemFactory.get_class(self.config.source)
             self._feeditem = item_cls.from_moderated(self)
         return self._feeditem
 
+    @cached_property
+    def type(self):
+        return self.config.source
+
 
 class SocialFeedPage(Page):
     feedconfig = models.ForeignKey(SocialFeedConfiguration,
-                                   blank=False,
-                                   null=False,
-                                   on_delete=models.PROTECT)
+                                   blank=True,
+                                   null=True,
+                                   on_delete=models.PROTECT,
+                                   help_text=_("Leave blank to show all the feeds."))
 
     content_panels = Page.content_panels + [
         FieldPanel('feedconfig'),
@@ -71,5 +85,11 @@ class SocialFeedPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super(SocialFeedPage,
                         self).get_context(request, *args, **kwargs)
-        context['feed'] = get_feed_items(self.feedconfig)
+        feed = None
+        if self.feedconfig:
+            feed = get_feed_items(self.feedconfig)
+        else:
+            feed = get_feed_items_mix(SocialFeedConfiguration.objects.all())
+
+        context['feed'] = feed
         return context

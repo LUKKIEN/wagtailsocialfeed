@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.2.0 (xxxx.xx.xx)
+==================
++ Added ability to mix all the feeds; just leave feedconfig empty in `SocialFeedPage` or `SocialFeedBlock`.
+
 0.1.0 (2016.09.27)
 ==================
 + Fixed PyPI long_description format error

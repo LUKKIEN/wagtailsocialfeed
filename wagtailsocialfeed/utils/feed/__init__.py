@@ -25,11 +25,15 @@ class FeedError(Exception):
 
 
 class FeedItem(object):
-    def __init__(self, id, text, posted, image_dict, *args, **kwargs):
+    def __init__(self, id, type, text, posted, image_dict, *args, **kwargs):
         self.id = six.text_type(id)  # Ensure it's a string
+        self.type = type
         self.text = text
         self.posted = posted
         self.image_dict = image_dict
+
+    def __repr__(self):
+        return "{} ({} posted {})".format(self.__class__.__name__, self.id, self.posted)
 
     @property
     def image(self):
@@ -54,6 +58,7 @@ class FeedItem(object):
         # object but why bother when it is saved in
         # moderated.posted as well
         source['posted'] = moderated.posted
+        source['type'] = moderated.type
         return cls(**source)
 
 

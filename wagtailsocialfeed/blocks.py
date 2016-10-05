@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 
 from django import forms
-
+from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailcore import blocks
 
 from .models import SocialFeedConfiguration
-from .utils import get_feed_items
+from .utils import get_feed_items, get_feed_items_mix
 
 
 class FeedChooserBlock(blocks.ChooserBlock):
@@ -19,12 +19,29 @@ class FeedChooserBlock(blocks.ChooserBlock):
             return value.pk
         return None
 
+    def value_from_form(self, value):
+        if value is None or isinstance(value, self.target_model):
+            return value
+        try:
+            value = int(value)
+        except ValueError:
+            return None
+
+        try:
+            return self.target_model.objects.get(pk=value)
+        except self.target_model.DoesNotExist:
+            return None
+
     def to_python(self, value):
-        return self.target_model.objects.get(pk=value)
+        if value:
+            return self.target_model.objects.get(pk=value)
+        return None
 
 
 class SocialFeedBlock(blocks.StructBlock):
-    feedconfig = FeedChooserBlock()
+    feedconfig = FeedChooserBlock(
+        required=False,
+        help_text=_("Select a feed configuration to show. Leave blank to show a mix of all the feeds"))
     limit = blocks.IntegerBlock(required=False, min_value=0)
 
     class Meta:
@@ -35,6 +52,13 @@ class SocialFeedBlock(blocks.StructBlock):
         context = super(SocialFeedBlock, self).get_context(value)
 
         feedconfig = value['feedconfig']
-        context['feed'] = get_feed_items(feedconfig, limit=value['limit'])
+        feed = None
+        if feedconfig:
+            feed = get_feed_items(feedconfig, limit=value['limit'])
+        else:
+            feed = get_feed_items_mix(SocialFeedConfiguration.objects.all(),
+                                      limit=value['limit'])
+
+        context['feed'] = feed
 
         return context

@@ -31,6 +31,7 @@ class TwitterFeedItem(FeedItem):
         date = dateparser.parse(raw.get('created_at'))
         return cls(
             id=raw['id'],
+            type='twitter',
             text=raw['text'],
             image_dict=image,
             posted=date
