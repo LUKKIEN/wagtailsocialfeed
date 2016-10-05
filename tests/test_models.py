@@ -15,7 +15,7 @@ from . import feed_response
 from .factories import SocialFeedConfigurationFactory, SocialFeedPageFactory
 
 
-class TestSocialFeedConfiguration(TestCase):
+class SocialFeedConfigurationTest(TestCase):
     def setUp(self):
         pass
 
@@ -31,7 +31,22 @@ class TestSocialFeedConfiguration(TestCase):
                          'instagram (johndoe)')
 
 
-class TestSocialFeedPage(TestCase):
+class ModeratedItemTest(TestCase):
+    @feed_response('twitter')
+    def setUp(self, tweets):
+        self.feedconfig = SocialFeedConfigurationFactory(
+            source='twitter', username='wagtailcms')
+        feed = FeedFactory.create('twitter')
+        items = feed.get_items(self.feedconfig)
+        self.item, created = self.feedconfig.moderated_items.get_or_create_for(items[0].serialize())
+
+    def test_str(self):
+        self.assertEqual(
+            six.text_type(self.item),
+            "ModeratedItem<twitter> (779235925826138112 posted 2016-09-23 08:28:16+00:00)")
+
+
+class SocialFeedPageTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
 
