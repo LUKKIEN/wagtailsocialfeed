@@ -213,7 +213,7 @@ class FacebookFeedTest(TestCase):
             self.assertIsInstance(item, FeedItem)
         self.assertEqual(
             stream[0].posted,
-            datetime.datetime(2016, 10, 04, 14, 48, 9, tzinfo=timezone.utc))
+            datetime.datetime(2016, 10, 4, 14, 48, 9, tzinfo=timezone.utc))
 
         self.assertEqual(stream[0].image_dict['thumb']['url'],
                          "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/14606290_1103282596374848_3084561525150401400_n.jpg?oh=4a993e12211341d2304724a5822b1fbf&oe=58628491" # NOQA

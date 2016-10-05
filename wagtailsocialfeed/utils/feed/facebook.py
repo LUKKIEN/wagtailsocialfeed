@@ -121,7 +121,7 @@ class FacebookFeedQuery(AbstractFeedQuery):
         return self.query_string.lower() in all_strings.lower()
 
     def __call__(self):
-        raw = self.paginator.next()
+        raw = next(self.paginator)
         data = raw['data']
         oldest_post = None
         if data:
