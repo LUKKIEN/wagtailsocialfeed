@@ -31,6 +31,7 @@ class FeedItem(object):
         self.text = text
         self.posted = posted
         self.image_dict = image_dict
+        self.original_data = kwargs.get('original_data', {})
 
     def __repr__(self):
         return "{} ({} posted {})".format(self.__class__.__name__, self.id, self.posted)
@@ -46,6 +47,21 @@ class FeedItem(object):
         """
         return self.image_dict
 
+    def __getattribute__(self, name):
+        """
+        Look for attributes in both the `FeedItem` as well as the original data.
+
+        Return an `AttributeError` when the attribute can't be found in either
+        of the two sources
+        """
+        try:
+            return object.__getattribute__(self, name)
+        except AttributeError as e:
+            original_data = object.__getattribute__(self, 'original_data')
+            if name in original_data:
+                return original_data[name]
+            raise e
+
     def serialize(self):
         return json.dumps(vars(self), default=date_handler)
 
@@ -59,7 +75,8 @@ class FeedItem(object):
         # moderated.posted as well
         source['posted'] = moderated.posted
         source['type'] = moderated.type
-        return cls(**source)
+        item = cls(**source)
+        return item
 
 
 class AbstractFeedQuery(object):

@@ -72,6 +72,9 @@ class TwitterFeedTest(TestCase):
         self.assertEqual(stream[-1].image_dict['large']['url'],
                          base_url + ":large")
 
+        #The following data is not explicitly stored, but should still be accessible
+        self.assertEqual(stream[0].in_reply_to_user_id, 1252591452)
+
     @responses.activate
     def test_search(self):
         with open('tests/fixtures/twitter.json', 'r') as feed_file:
@@ -153,6 +156,9 @@ class InstagramFeedTest(TestCase):
                          "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
                          )
 
+        # The following data is not explicitly stored, but should still be accessible
+        self.assertEqual(stream[0].code, "BJMXINrjcFe")
+
     @responses.activate
     def test_search(self):
         with open('tests/fixtures/instagram.json', 'r') as feed_file:
@@ -218,6 +224,9 @@ class FacebookFeedTest(TestCase):
         self.assertEqual(stream[0].image_dict['thumb']['url'],
                          "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/14606290_1103282596374848_3084561525150401400_n.jpg?oh=4a993e12211341d2304724a5822b1fbf&oe=58628491" # NOQA
                          )
+
+        # The following data is not explicitly stored, but should still be accessible
+        self.assertEqual(stream[0].icon, "https://www.facebook.com/images/icons/photo.gif")
 
     @responses.activate
     @override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=datetime.timedelta(weeks=500))

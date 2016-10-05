@@ -45,6 +45,7 @@ class InstagramFeedItem(FeedItem):
             text=raw['caption']['text'],
             image_dict=image,
             posted=date,
+            original_data=raw,
         )
 
 

@@ -96,6 +96,7 @@ class FacebookFeedItem(FeedItem):
             text=text,
             image_dict=image,
             posted=date,
+            original_data=raw,
         )
 
 

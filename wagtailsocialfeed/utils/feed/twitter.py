@@ -34,7 +34,8 @@ class TwitterFeedItem(FeedItem):
             type='twitter',
             text=raw['text'],
             image_dict=image,
-            posted=date
+            posted=date,
+            original_data=raw
         )
 
 

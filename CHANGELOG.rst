@@ -6,6 +6,7 @@ CHANGELOG
 ==================
 + Added Facebook support
 + Added ability to mix all the feeds; just leave feedconfig empty in `SocialFeedPage` or `SocialFeedBlock`.
++ Made all returned data avaiable in `FeedItem` objects, even if it is not stored explicitly.
 
 0.1.0 (2016.09.27)
 ==================
