@@ -36,7 +36,7 @@ class InstagramFeedItem(FeedItem):
                 'thumb': raw['images']['thumbnail'],
                 'small': raw['images']['low_resolution'],
                 'medium': raw['images']['standard_resolution'],
-                'largel': None,
+                'large': None,
             }
 
         return cls(

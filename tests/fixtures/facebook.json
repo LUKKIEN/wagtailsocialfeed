@@ -1,0 +1,1241 @@
+{
+  "paging": {
+    "next": "https://graph.facebook.com/v2.1/547581871944926/posts?access_token=EAACEdEose0cBAJXCjmXPBHNamFnGmKpjRoGah9fSn3LzGnZC16axW4FMBPdK4KZAWrwjjd7MiZBKQLJgQoAaSPZBz7DZC3E0ZALcmOqDb4sDZC6hdrjpJGUtjSE5EQ7TXVYz70yLa7Lk9UZA6ARc5lk4wLAcGCqbFpkusVUTQBtLUUa7WZAMHHIwZC24WpZCfgGgGYZD&limit=25&until=1441902467&__paging_token=enc_AdDr67qj9l20CcD158cXKBK28IP5bA4PrJ1v341UB3F9crjwT37aKNEThpq1sVIRAqjYLqbbZBxv66ZBBZCrZCT05AH9SO9SfgRSVedSL3z0LIl9QQZDZD",
+    "previous": "https://graph.facebook.com/v2.1/547581871944926/posts?since=1475592489&access_token=EAACEdEose0cBAJXCjmXPBHNamFnGmKpjRoGah9fSn3LzGnZC16axW4FMBPdK4KZAWrwjjd7MiZBKQLJgQoAaSPZBz7DZC3E0ZALcmOqDb4sDZC6hdrjpJGUtjSE5EQ7TXVYz70yLa7Lk9UZA6ARc5lk4wLAcGCqbFpkusVUTQBtLUUa7WZAMHHIwZC24WpZCfgGgGYZD&limit=25&__paging_token=enc_AdADRYO9XZAZAt5uGETxWLCnIPZAAOVwofuI5ZCeCfmIsbtCyZCTBfal0GbneuZCuk0ApZCCcBV82PcZAhhT2w8wj3BO4cj2NijXIdQoO9zZA1cfLvHOpQwZDZD&__previous=1"
+  },
+  "data": [
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/14606290_1103282596374848_3084561525150401400_n.jpg?oh=4a993e12211341d2304724a5822b1fbf&oe=58628491",
+      "story": "Python Developers updated their cover photo.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Python Developers's cover photo",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1103282796374828",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1103282796374828",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-10-04T14:48:09+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.676613085708470.1073741827.547581871944926/1103282596374848/?type=3",
+      "object_id": "1103282596374848",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2016-10-04T14:48:09+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_1103282796374828",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQANXcnF1mBqEUNg&w=130&h=130&url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1%2AraWO3dhM4jMjf9VY-kZzNg.png&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "How it feels to learn JavaScript in 2016",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1103194516383656",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1103194516383656",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-10-05T09:35:11+0000",
+      "caption": "hackernoon.com",
+      "link": "https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f#.b6we81mib",
+      "shares": {
+        "count": 49
+      },
+      "created_time": "2016-10-04T13:00:45+0000",
+      "message": "I have been using javascript for few projects..., this is funny and true :), have a look\nhttps://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f#.b6we81mib",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1103194516383656",
+      "status_type": "shared_story",
+      "description": "Edit: Thanks for pointing typos and mistakes, I\u2019ll update the article as noted. Discussion in HackerNews and Reddit."
+    },
+    {
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1090936620942779",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1090936620942779",
+          "name": "Like"
+        }
+      ],
+      "created_time": "2016-09-20T19:19:35+0000",
+      "is_hidden": false,
+      "id": "547581871944926_1090936620942779",
+      "story": "Python Developers shared a link.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "shares": {
+        "count": 9
+      },
+      "application": {
+        "category": "Utilities",
+        "namespace": "medium-com",
+        "link": "https://medium.com/",
+        "name": "Medium",
+        "id": "542599432471018"
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "type": "link",
+      "status_type": "shared_story",
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQBcBQg2bGzYUW_r&w=130&h=130&url=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1%2AP9rO1kSV7Ws6418_jRBQcA.jpeg&cfs=1",
+      "description": "There\u2019s an interesting dualism in attitude toward the Internet of Things:",
+      "link": "https://medium.com/@dconrad/the-internet-of-things-is-looking-for-its-visicalc-1a4b0e95c22a#.d2d5w7l9m",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "name": "The Internet of Things is looking for its VisiCalc",
+      "updated_time": "2016-10-02T06:06:31+0000",
+      "caption": "medium.com",
+      "is_expired": false
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQCXATvBB_NWqa_9&w=130&h=130&url=http%3A%2F%2Fi2.wp.com%2Fbafflednerd.com%2Fwp-content%2Fuploads%2F2016%2F06%2Fcropped-Bafflednerd_Twitter-profile-pic.png%3Ffit%3D512%252C512&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Learn Python online \u2013 A curated list of courses on Python",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1074527262583715",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1074527262583715",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-10-03T23:53:56+0000",
+      "caption": "bafflednerd.com",
+      "link": "http://bafflednerd.com/learn-python-online",
+      "shares": {
+        "count": 64
+      },
+      "created_time": "2016-08-30T07:53:58+0000",
+      "message": "http://bafflednerd.com/learn-python-online",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1074527262583715",
+      "status_type": "shared_story",
+      "description": "Python is a high-level dynamic programming language used for scripting, web scraping, web development, data analysis, building predictive models etc. Here is a curated list of courses on Python whe\u2026"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQAue6Bf9uO7clZa&w=130&h=130&url=https%3A%2F%2Fwww.bbvaopenmind.com%2Fwp-content%2Fuploads%2F2016%2F06%2Fbbva-openmind-banafa-big-data-basics-2-jpg.jpg&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Small Data vs. Big Data: Back to the Basics - OpenMind",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1053570108012764",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1053570108012764",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-10-02T06:06:46+0000",
+      "caption": "bbvaopenmind.com",
+      "link": "https://www.bbvaopenmind.com/en/small-data-vs-big-data-back-to-the-basics/?utm_source=facebook&utm_medium=techreview&utm_campaign=MITcompany&utm_content=SmallBigData",
+      "shares": {
+        "count": 16
+      },
+      "created_time": "2016-07-31T14:12:28+0000",
+      "message": "#bigdata #datascience #machinelearning",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1053570108012764",
+      "status_type": "shared_story",
+      "description": "What is Small Data? In the middle of the Big Data explosion, Ahmed Banafa explains why we need to go back to the basics in terms of data analytic"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQBs-TZ99sUC-HZ-&w=130&h=130&url=http%3A%2F%2Flemire.me%2Ffr%2Fimages%2FJPG%2F2011%2FD_Lemire_2751_RVB_facebook.jpg&cfs=1&sx=120&sy=0&sw=630&sh=630",
+      "story": "Python Developers shared a link.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Theory lags practice",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1052296914806750",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1052296914806750",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-10-02T06:06:50+0000",
+      "caption": "lemire.me",
+      "link": "http://lemire.me/blog/2015/01/07/theory-lags-practice/",
+      "shares": {
+        "count": 4
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2016-07-29T08:40:20+0000",
+      "is_hidden": false,
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1052296914806750",
+      "status_type": "shared_story",
+      "description": "Related Posts: What ten years teaching a technical topic in college taught\u2026 Don\u2019t study latin if you want to become a better\u2026 The big-O notation is a teaching tool"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQAkSZExyxbR00ia&w=130&h=130&url=http%3A%2F%2Fqzprod.files.wordpress.com%2F2015%2F10%2Famazon-chiner.jpg%3Fquality%3D80%26strip%3Dall%26w%3D1600&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "What Amazon's homepage looked like when it launched 21 years ago this month",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1052261458143629",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1052261458143629",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-07-29T06:25:36+0000",
+      "caption": "qz.com",
+      "link": "http://qz.com/734985/this-is-what-amazons-homepage-looked-like-when-it-launched-21-years-ago-this-month/?utm_source=parWD&mbid=social_fb",
+      "shares": {
+        "count": 12
+      },
+      "created_time": "2016-07-29T06:25:36+0000",
+      "message": "We all start from somewhere",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1052261458143629",
+      "status_type": "shared_story",
+      "description": "You've come a long way, Bezos."
+    },
+    {
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1045339262169182",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1045339262169182",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-09-26T16:38:21+0000",
+      "shares": {
+        "count": 21
+      },
+      "created_time": "2016-07-16T17:25:22+0000",
+      "message": "There are some good tutorials here with python, especially if you are interested in data science and machine learning http://www.datacamp.com/home",
+      "type": "status",
+      "id": "547581871944926_1045339262169182",
+      "status_type": "mobile_status_update"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQAoZS5COjaetPL0&w=130&h=130&url=https%3A%2F%2Fd267cvn3rvuq91.cloudfront.net%2Fi%2Fimages%2Fturing.testx2000.jpg%3Fcx%3D0%26cy%3D736%26cw%3D1999%26ch%3D1124%26sw%3D1200&cfs=1",
+      "story": "Python Developers shared a link.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "A tougher Turing Test shows that computers still have virtually no common sense",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1043974352305673",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1043974352305673",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-07-14T15:56:06+0000",
+      "caption": "www.technologyreview.com",
+      "link": "https://www.technologyreview.com/s/601897/tougher-turing-test-exposes-chatbots-stupidity/?set=601902&utm_campaign=socialflow&utm_source=facebook&utm_medium=post",
+      "shares": {
+        "count": 9
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2016-07-14T15:54:01+0000",
+      "is_hidden": false,
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1043974352305673",
+      "status_type": "shared_story",
+      "description": "We have a long way to go if we want virtual assistants to understand us."
+    },
+    {
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1023379127698529",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1023379127698529",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-09-26T16:38:28+0000",
+      "shares": {
+        "count": 39
+      },
+      "created_time": "2016-06-07T05:20:57+0000",
+      "message": "For whatever reason, we live in a culture where we think that the abilities of our best scientists and our best mathematicians are somehow just God-given. That either you have this gift or you don\u2019t, and it\u2019s not related to help, to hard work, to luck. I think that\u2019s part of the reason why, when we try to talk about mathematics to the public, so many people just immediately respond by saying, \u201cWell, I was never very good at math. So I\u2019m not really supposed to understand it or identify with it.\u201d I might have had some mathematical talent passed through my father genetically, but that was by no means enough. You have to be passionate about a subject.\nAt the same time, I want it to be known that it\u2019s totally OK to fail. In fact, you learn from your mistakes. We learn early on if that you want to be good at playing the violin, you\u2019ve got to practice. If you want to be good at sports, you practice. But for some crazy reason, our culture assumes that if you\u2019re good at math, you were just born with it, and that\u2019s it. But you can be so good at math in so many different ways. I failed my [graduate-school] algebra qualifications! That doesn\u2019t mean I can\u2019t end up being a successful mathematician. But when I tell people I failed at this, nobody believes me. \n\n- Ken Ono, Mathematician",
+      "type": "status",
+      "id": "547581871944926_1023379127698529",
+      "status_type": "mobile_status_update"
+    },
+    {
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1012525502117225",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1012525502117225",
+          "name": "Like"
+        }
+      ],
+      "created_time": "2016-05-17T13:12:31+0000",
+      "is_hidden": false,
+      "message": "Mac users have a look on this https://m.facebook.com/Elrey.packaging/",
+      "story": "Python Developers shared a Page.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "id": "547581871944926_1012525502117225",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "27": [
+          {
+            "length": 4,
+            "offset": 27,
+            "type": "page",
+            "id": "463727083824275",
+            "name": "ElRey, From Py to App"
+          }
+        ]
+      },
+      "type": "link",
+      "status_type": "shared_story",
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/13165930_465554013641582_3092815928514095697_n.jpg?oh=ef23bdb8033e17edd574bbec5d2bf79c&oe=586BD22F",
+      "description": "Compile your Python scripts on Mac Os as .app packages to make them more easily accessible and assign them icons with simple drag and drop actions",
+      "object_id": "463727083824275",
+      "link": "https://www.facebook.com/Elrey.packaging/",
+      "properties": [
+        {
+          "text": "143 like this",
+          "name": "Community"
+        }
+      ],
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "name": "ElRey, From Py to App",
+      "updated_time": "2016-08-17T07:51:06+0000",
+      "is_expired": false
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQCgCGLRlIL_pPRv&w=130&h=130&url=http%3A%2F%2Fi1-mac.softpedia-static.com%2Fscreenshots%2FElRey_1.jpg&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "ElRey Download Mac",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1012522395450869",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/1012522395450869",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-05-17T13:05:17+0000",
+      "caption": "mac.softpedia.com",
+      "link": "http://mac.softpedia.com/get/Developer-Tools/ElRey.shtml#download",
+      "shares": {
+        "count": 2
+      },
+      "created_time": "2016-05-17T13:02:04+0000",
+      "message": "http://mac.softpedia.com/get/Developer-Tools/ElRey.shtml#download",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_1012522395450869",
+      "status_type": "shared_story",
+      "description": "Free Download ElRey for Mac 1.1.0 - Compile your Python scripts as .app packages to make them more easily accessible and assign them icons with simple drag and drop actions"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t15.0-10/s130x130/12441211_937873159642321_259288578_n.jpg?oh=2b1b636628be9e8dbce82216df0d5e92&oe=586B62EF",
+      "story": "Python Developers shared Code.org's video.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Code.org",
+      "is_hidden": false,
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/961860053850437",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/961860053850437",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-09-26T16:38:33+0000",
+      "source": "https://video.xx.fbcdn.net/v/t42.1790-2/12524453_109346739455759_465604370_n.mp4?efg=eyJybHIiOjMwMCwicmxhIjo4NjIsInZlbmNvZGVfdGFnIjoic3ZlX3NkIn0%3D&rl=300&vabr=115&oh=24f9d6c1b7a9bcef5a5d3526a19d96a1&oe=57F6FC17",
+      "link": "https://www.facebook.com/Code.org/videos/937872139642423/",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "36": [
+          {
+            "length": 5,
+            "offset": 36,
+            "id": "937872139642423",
+            "name": ""
+          }
+        ],
+        "25": [
+          {
+            "length": 8,
+            "offset": 25,
+            "type": "page",
+            "id": "309754825787494",
+            "name": "Code.org"
+          }
+        ]
+      },
+      "created_time": "2016-02-20T18:33:40+0000",
+      "message": "#Encryption #security",
+      "type": "video",
+      "id": "547581871944926_961860053850437",
+      "status_type": "shared_story",
+      "description": "If you're hearing a lot about Apple vs the FBI, watch this video to learn HOW encryption works, at a level anybody can understand. #CSForAll"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/12553036_942735325762419_1036066491057865010_n.jpg?oh=38dbb2429b3e493dc5349ccf8e6e34c2&oe=5866B22A",
+      "story": "Python Developers shared BuzzKid's photo.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "BuzzKid",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/952993438070432",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/952993438070432",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-07-04T18:34:59+0000",
+      "link": "https://www.facebook.com/buzzkid/photos/a.935819033120715.1073741829.930453776990574/942735325762419/?type=3",
+      "object_id": "942735325762419",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "35": [
+          {
+            "length": 5,
+            "offset": 35,
+            "id": "942735325762419",
+            "name": ""
+          }
+        ],
+        "25": [
+          {
+            "length": 7,
+            "offset": 25,
+            "type": "page",
+            "id": "930453776990574",
+            "name": "BuzzKid"
+          }
+        ]
+      },
+      "created_time": "2016-02-02T11:25:36+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_952993438070432",
+      "status_type": "shared_story",
+      "description": "\"Overnight success\" only took 8 years.\n\n#facts #angrybirds #inspiration #motivation #buzzkid"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/12540632_1301619646518572_2835559551084168273_n.png?oh=6bfd7ee80578d872929e58068e8b9a26&oe=586C2547",
+      "story": "Python Developers shared The Hacker News's post.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "The Hacker News",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/943887828980993",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/943887828980993",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-07-04T18:35:03+0000",
+      "link": "https://www.facebook.com/thehackernews/photos/a.197666140247267.65555.172819872731894/1301619646518572/?type=3",
+      "object_id": "1301619646518572",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "25": [
+          {
+            "length": 15,
+            "offset": 25,
+            "type": "page",
+            "id": "172819872731894",
+            "name": "The Hacker News"
+          }
+        ]
+      },
+      "created_time": "2016-01-13T04:54:50+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_943887828980993",
+      "status_type": "shared_story",
+      "description": "Remembering #AaronSwartz \u2014 Died 3-Years Ago Today #Respect #Geek"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/12369274_929775587058884_5590411905199023943_n.jpg?oh=8b6da9a6220780a891909fe85bcdbd90&oe=58A3D71F",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Timeline Photos",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/929775587058884",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/929775587058884",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-09-26T16:38:38+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.929775600392216.1073741829.547581871944926/929775587058884/?type=3",
+      "object_id": "929775587058884",
+      "shares": {
+        "count": 49
+      },
+      "created_time": "2015-12-14T11:12:26+0000",
+      "message": "Don't give up #learning #research",
+      "type": "photo",
+      "id": "547581871944926_929775587058884",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-1/s100x100/13872855_10154437501912720_1951729510412866672_n.jpg?oh=14bf346c0f16e4ffd909ca4016840030&oe=58A6EA4A",
+      "story": "Python Developers shared Samir AD's post.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Samir",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/908818365821273",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/908818365821273",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-07-30T22:41:41+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/posts/908813832488393",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "25": [
+          {
+            "length": 8,
+            "offset": 25,
+            "type": "user",
+            "id": "10153111885972720",
+            "name": "Samir AD"
+          }
+        ]
+      },
+      "created_time": "2015-10-21T09:20:50+0000",
+      "is_hidden": false,
+      "type": "link",
+      "id": "547581871944926_908818365821273",
+      "status_type": "shared_story",
+      "description": "Python Developer Roles - London Based - Hedge Funds and Tech Startups.  We're looking for some of the brightest graduates in Computer Science with a strong interest in Python, C++.  If interested please get in touch at sam@durlstonpartners.com"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/12144926_907576882612088_1187691706626994253_n.jpg?oh=53821924de71d7f8d55bd36f64748d06&oe=58A7DCB1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Mobile Uploads",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/907576882612088",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/907576882612088",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-09-09T13:58:40+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.903855556317554.1073741828.547581871944926/907576882612088/?type=3",
+      "object_id": "907576882612088",
+      "shares": {
+        "count": 19
+      },
+      "created_time": "2015-10-18T13:15:37+0000",
+      "message": "#django #webdevelopment #python",
+      "type": "photo",
+      "id": "547581871944926_907576882612088",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/11219435_906382429398200_5933473822806315700_n.jpg?oh=ee6490e1bc0b3d45d9c2d1ba4fed466e&oe=5863C68C",
+      "story": "Python Developers added a new photo.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Mobile Uploads",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/906382429398200",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/906382429398200",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2015-10-15T09:21:49+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.903855556317554.1073741828.547581871944926/906382429398200/?type=3",
+      "object_id": "906382429398200",
+      "shares": {
+        "count": 19
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2015-10-15T09:21:49+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_906382429398200",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/c111.0.130.130/p130x130/1901271_549262505225012_2574340618757445324_n.jpg?oh=27dbca1821ba789777e2450775285185&oe=5867C339",
+      "story": "Python Developers shared HackerEarth's event.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Happay Python Hiring Challenge",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/904055896297520",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/904055896297520",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2015-10-09T09:06:32+0000",
+      "caption": "Happay Python Hiring Challenge",
+      "link": "https://www.facebook.com/events/1085494868128467/",
+      "object_id": "1085494868128467",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "39": [
+          {
+            "length": 5,
+            "offset": 39,
+            "type": "event",
+            "id": "1085494868128467",
+            "name": "Happay Python Hiring Challenge"
+          }
+        ],
+        "25": [
+          {
+            "length": 11,
+            "offset": 25,
+            "type": "page",
+            "id": "123161387835128",
+            "name": "HackerEarth"
+          }
+        ]
+      },
+      "created_time": "2015-10-09T09:06:32+0000",
+      "is_hidden": false,
+      "icon": "https://www.facebook.com/images/icons/event.gif",
+      "type": "event",
+      "id": "547581871944926_904055896297520",
+      "status_type": "shared_story",
+      "description": "Happay is hiring Python Developers for their team in Bangalore. Take up the test and stand a chance!  \n\nCTC : INR 8L - INR 20L\nExperience : 2-6 year \nPosition : 8 \nLocation : Bangalore\n\nRegister for the challenge at : http://hck.re/wED7yL"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/12096049_904046702965106_240591864244449776_n.jpg?oh=8685d7707e61d1de6564bde2181d9c4a&oe=58692336",
+      "story": "Python Developers added a new photo.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Mobile Uploads",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/904046702965106",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/904046702965106",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-08-02T00:21:08+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.903855556317554.1073741828.547581871944926/904046702965106/?type=3",
+      "object_id": "904046702965106",
+      "shares": {
+        "count": 38
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2015-10-09T08:27:24+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_904046702965106",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/12119173_903855519650891_6410179269907112506_n.jpg?oh=a970acc398fc46949079d4f423a19943&oe=586C6EDC",
+      "story": "Python Developers added a new photo.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Mobile Uploads",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903855519650891",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903855519650891",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2015-10-08T17:16:09+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/photos/a.903855556317554.1073741828.547581871944926/903855519650891/?type=3",
+      "object_id": "903855519650891",
+      "shares": {
+        "count": 20
+      },
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ]
+      },
+      "created_time": "2015-10-08T17:13:06+0000",
+      "is_hidden": false,
+      "type": "photo",
+      "id": "547581871944926_903855519650891",
+      "status_type": "added_photos",
+      "icon": "https://www.facebook.com/images/icons/photo.gif"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQDwMp7GyW-iWMsW&w=130&h=130&url=http%3A%2F%2Fnews.mit.edu%2Fsites%2Fmit.edu.newsoffice%2Ffiles%2Fstyles%2Fog%2Fpublic%2Fimages%2F2015%2FMIT-SCM-Micromasters.jpg&cfs=1",
+      "is_hidden": false,
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Online courses + time on campus = a new path to an MIT master\u2019s degree",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903846009651842",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903846009651842",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2015-10-08T16:35:09+0000",
+      "caption": "news.mit.edu",
+      "link": "http://mitsha.re/T7UeP",
+      "shares": {
+        "count": 8
+      },
+      "created_time": "2015-10-08T16:35:09+0000",
+      "message": "This is really great, check the MITOpencourseware website...one course can change your whole perspective of how things work",
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_903846009651842",
+      "status_type": "shared_story",
+      "description": "Pilot program reimagines admissions process, introduces \u201cMicroMaster\u2019s.\u201d"
+    },
+    {
+      "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQDYGwyblgOTuS6O&w=130&h=130&url=https%3A%2F%2Fcdn0.vox-cdn.com%2Fthumbor%2FBRlIdUqphC7RP6ib61XuMV8xF7o%3D%2F0x104%3A1024x680%2F1600x900%2Fcdn0.vox-cdn.com%2Fuploads%2Fchorus_image%2Fimage%2F47354000%2F9990024683_a37089e13d_b.0.0.jpg&cfs=1",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Scientists can draw very different meanings from the same data, study shows",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903843396318770",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/903843396318770",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2015-10-08T16:26:39+0000",
+      "caption": "theverge.com",
+      "link": "http://www.theverge.com/2015/10/7/9469845/different-meanings-from-same-data-research-science",
+      "shares": {
+        "count": 2
+      },
+      "created_time": "2015-10-08T16:26:39+0000",
+      "is_hidden": false,
+      "icon": "https://www.facebook.com/images/icons/post.gif",
+      "type": "link",
+      "id": "547581871944926_903843396318770",
+      "status_type": "shared_story",
+      "description": "Giving the same information to multiple scientific teams can lead to very different conclusions, a report published today in Nature shows. And that's exactly why two researchers think scientists..."
+    },
+    {
+      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/1551594_10154891911735381_4937122749015862448_n.jpg?oh=35317b37db758c68543beb8ac603776c&oe=586660AB",
+      "story": "Python Developers shared Ben Ainger's post.",
+      "from": {
+        "category": "Education",
+        "name": "Python Developers",
+        "id": "547581871944926"
+      },
+      "name": "Ben",
+      "privacy": {
+        "allow": "",
+        "deny": "",
+        "friends": "",
+        "description": "",
+        "value": ""
+      },
+      "is_expired": false,
+      "actions": [
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/892567317446378",
+          "name": "Comment"
+        },
+        {
+          "link": "https://www.facebook.com/547581871944926/posts/892567317446378",
+          "name": "Like"
+        }
+      ],
+      "updated_time": "2016-06-27T07:03:45+0000",
+      "link": "https://www.facebook.com/PythonDevelopers/posts/892564174113359",
+      "story_tags": {
+        "0": [
+          {
+            "length": 17,
+            "offset": 0,
+            "type": "page",
+            "id": "547581871944926",
+            "name": "Python Developers"
+          }
+        ],
+        "25": [
+          {
+            "length": 10,
+            "offset": 25,
+            "type": "user",
+            "id": "10155033551950381",
+            "name": "Ben Ainger"
+          }
+        ]
+      },
+      "created_time": "2015-09-10T16:27:47+0000",
+      "is_hidden": false,
+      "type": "link",
+      "id": "547581871944926_892567317446378",
+      "status_type": "shared_story",
+      "description": "Hi,\n\nI hope that everyone is well?\n\nApologies for being so direct, but I specialise in recruiting for Python Developers and we currently have a wide variety of positions available. We have roles from Graduate level all of the way up to Director, so I would be keen to speak with any Developers based in Europe who are currently considering a move.\n\nIf you would like to find out more or receive any information, please feel free to get in touch on 0203 402 6902 or b.ainger@westbourne-partners.com.\n\nI look forward to hearing from you.\n\nBest regards,\n\nBen"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 from .twitter import TwitterFeed, TwitterFeedItem
 from .instagram import InstagramFeed, InstagramFeedItem
+from .facebook import FacebookFeed, FacebookFeedItem
 
 from collections import namedtuple
 
@@ -7,7 +8,8 @@ FeedClasses = namedtuple('FeedClasses', ['feed', 'item'])
 
 FEED_CONFIG = {
     'twitter': FeedClasses(TwitterFeed, TwitterFeedItem),
-    'instagram': FeedClasses(InstagramFeed, InstagramFeedItem)
+    'instagram': FeedClasses(InstagramFeed, InstagramFeedItem),
+    'facebook': FeedClasses(FacebookFeed, FacebookFeedItem)
 }
 
 

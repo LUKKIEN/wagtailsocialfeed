@@ -3,7 +3,7 @@ import json
 import re
 
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 import responses
@@ -190,3 +190,60 @@ class InstagramFeedTest(TestCase):
     def test_feed_unexpected_response(self, feed):
         with self.assertRaises(FeedError):
             self.stream.get_items(config=self.feedconfig)
+
+
+class FacebookFeedTest(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.feedconfig = SocialFeedConfigurationFactory.create(
+            source='facebook')
+        self.stream = FeedFactory.create('facebook')
+        self.cache_key = 'socialfeed:{}:data:{}'.format('FacebookFeed', self.feedconfig.id)
+
+    @feed_response('facebook')
+    def test_feed(self, feed):
+        self.assertIsNone(cache.get(self.cache_key))
+
+        stream = self.stream.get_items(config=self.feedconfig)
+
+        self.assertIsNotNone(cache.get(self.cache_key))
+        self.assertEqual(len(stream), 25)
+
+        for item in stream:
+            self.assertIsInstance(item, FeedItem)
+        self.assertEqual(
+            stream[0].posted,
+            datetime.datetime(2016, 10, 04, 14, 48, 9, tzinfo=timezone.utc))
+
+        self.assertEqual(stream[0].image_dict['thumb']['url'],
+                         "https://scontent.xx.fbcdn.net/v/t1.0-0/s130x130/14606290_1103282596374848_3084561525150401400_n.jpg?oh=4a993e12211341d2304724a5822b1fbf&oe=58628491" # NOQA
+                         )
+
+    @responses.activate
+    @override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=datetime.timedelta(weeks=500))
+    def test_search(self):
+        with open('tests/fixtures/facebook.json', 'r') as feed_file:
+            page1 = json.loads("".join(feed_file.readlines()))
+        with open('tests/fixtures/facebook.2.json', 'r') as feed_file:
+            page2 = json.loads("".join(feed_file.readlines()))
+
+        responses.add(
+            responses.GET,
+            re.compile('(?!.*paging_token)https?://graph.facebook.com.*'),
+            json=page1, status=200)
+
+        responses.add(
+            responses.GET,
+            re.compile('(?=.*paging_token)https?://graph.facebook.com.*'),
+            json=page2, status=200)
+
+        q = "tutorials"
+        cache_key = "{}:q-{}".format(self.cache_key, q)
+
+        self.assertIsNone(cache.get(cache_key))
+        stream = self.stream.get_items(config=self.feedconfig,
+                                       query_string=q)
+        self.assertIsNotNone(cache.get(cache_key))
+        self.assertEqual(len(stream), 2)
+        for s in stream:
+            self.assertIn('tutorials', s.text)

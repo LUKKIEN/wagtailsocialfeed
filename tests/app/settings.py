@@ -93,4 +93,8 @@ WAGTAIL_SOCIALFEED_CONFIG = {
         'ACCESS_TOKEN_KEY': 'SOME_KEY',
         'ACCESS_TOKEN_SECRET': 'SOME_SECRET'
     },
+    'facebook': {
+        'CLIENT_ID': 'SOME_ID',
+        'CLIENT_SECRET': 'SOME_SECRET',
+    }
 }

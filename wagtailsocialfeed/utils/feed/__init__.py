@@ -81,7 +81,7 @@ class AbstractFeedQuery(object):
         self.username = username
         self.query_string = query_string
 
-    def __call__(self, max_id=None):
+    def __call__(self, **kwargs):
         raise NotImplementedError('The __call__ function needs to be implemented to provide the core functionality')
 
 

@@ -17,6 +17,7 @@ class SocialFeedConfiguration(models.Model):
     FEED_CHOICES = (
         ('twitter', _('Twitter')),
         ('instagram', _('Instagram')),
+        ('facebook', _('Facebook'))
     )
 
     source = models.CharField(_('Feed source'),

@@ -31,7 +31,8 @@ Features
 
 Implementations
 ---------------
-At the moment, only two social media sources are supported.
+The following social media sources are supported:
 
 * Twitter
+* Facebook
 * Instagram

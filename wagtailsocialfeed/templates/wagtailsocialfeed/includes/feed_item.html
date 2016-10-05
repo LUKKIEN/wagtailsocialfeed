@@ -1,5 +1,6 @@
 <p>{{ item.text }}</p>
 <span>{{ item.posted }}</span>
 {% if item.image %}
-    <img src="{{ item.image.small.url }}" />
+    {{ image.image }}
+    <img src="{{ item.image.thumb.url }}" />
 {% endif %}

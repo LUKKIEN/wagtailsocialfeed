@@ -7,6 +7,25 @@ from functools import wraps
 import responses
 
 
+def _facebook(modified):
+    with open('tests/fixtures/facebook.json', 'r') as feed_file:
+        lines = feed_file.readlines()
+        content = "".join(lines)
+        feed = json.loads(content)
+    if modified:
+        feed = modified(feed)
+
+    # oauth/access_token
+
+    responses.add(responses.GET,
+                  re.compile('https?://graph.facebook.com/.*'),
+                  json=feed, status=200)
+    try:
+        return feed['data']
+    except KeyError:
+        return []
+
+
 def _twitter(modifier):
     with open('tests/fixtures/twitter.json', 'r') as feed_file:
         feed = json.loads("".join(feed_file.readlines()))
@@ -47,6 +66,8 @@ def feed_response(sources, modifier=None):
                     feeds.append(_twitter(modifier))
                 elif source == 'instagram':
                     feeds.append(_instagram(modifier))
+                elif source == 'facebook':
+                    feeds.append(_facebook(modifier))
             feeds.extend(args)
             return func(obj, *feeds, **kwargs)
         return func_wrapper

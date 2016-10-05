@@ -12,9 +12,11 @@ with open('CHANGELOG.rst') as changelog_file:
 install_requires = [
     'wagtail>=1.6',
     'twython>=3.0,<4.0',
+    'facepy>=1.0.8',
     'wagtailfontawesome>=1.0',
     'requests>=2.0',
-    'python-dateutil>=2.5'
+    'python-dateutil>=2.5',
+    'enum34',
 ]
 
 test_require = [
