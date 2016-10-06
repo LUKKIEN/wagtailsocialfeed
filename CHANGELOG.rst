@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.2.0 (xxxx.xx.xx)
+0.2.0 (2016.10.06)
 ==================
 + Added Facebook support
 + Added ability to mix all the feeds; just leave feedconfig empty in `SocialFeedPage` or `SocialFeedBlock`.
