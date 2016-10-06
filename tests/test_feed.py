@@ -2,15 +2,19 @@ import datetime
 import json
 import re
 
+import responses
+from dateutil.tz import tzutc
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.utils import timezone
 
-import responses
 from wagtailsocialfeed.utils.feed import AbstractFeed, FeedError, FeedItem
+from wagtailsocialfeed.utils.feed.facebook import (FacebookFeed,
+                                                   FacebookFeedItem)
 from wagtailsocialfeed.utils.feed.factory import FeedFactory
-from wagtailsocialfeed.utils.feed.instagram import InstagramFeed
-from wagtailsocialfeed.utils.feed.twitter import TwitterFeed
+from wagtailsocialfeed.utils.feed.instagram import (InstagramFeed,
+                                                    InstagramFeedItem)
+from wagtailsocialfeed.utils.feed.twitter import TwitterFeed, TwitterFeedItem
 
 from . import feed_response
 from .factories import SocialFeedConfigurationFactory
@@ -32,6 +36,7 @@ class FeedFactoryTest(TestCase):
     def test_create(self):
         self.assertIsInstance(FeedFactory.create('twitter'), TwitterFeed)
         self.assertIsInstance(FeedFactory.create('instagram'), InstagramFeed)
+        self.assertIsInstance(FeedFactory.create('facebook'), FacebookFeed)
         with self.assertRaises(NotImplementedError):
             FeedFactory.create('ello')
 
@@ -94,8 +99,16 @@ class TwitterFeedTest(TestCase):
         cache_key = "{}:q-{}".format(self.cache_key, q)
 
         self.assertIsNone(cache.get(cache_key))
-        stream = self.stream.get_items(config=self.feedconfig,
-                                       query_string=q)
+
+        # Ensure we set the SEARCH_MAX_HISTORY big enough for both twitter
+        # pages to be included
+        now = datetime.datetime.now(tzutc())
+        last_post_date = TwitterFeedItem.get_post_date(page2[-1])
+        delta = (now - last_post_date) + datetime.timedelta(seconds=10)
+        with override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=delta):
+            stream = self.stream.get_items(config=self.feedconfig,
+                                           query_string=q)
+
         self.assertIsNotNone(cache.get(cache_key))
         self.assertEqual(len(stream), 2)
         for s in stream:
@@ -180,8 +193,15 @@ class InstagramFeedTest(TestCase):
         cache_key = "{}:q-{}".format(self.cache_key, q)
 
         self.assertIsNone(cache.get(cache_key))
-        stream = self.stream.get_items(config=self.feedconfig,
-                                       query_string=q)
+
+        # Ensure we set the SEARCH_MAX_HISTORY big enough for both instagram
+        # pages to be included
+        now = datetime.datetime.now(tzutc())
+        last_post_date = InstagramFeedItem.get_post_date(page2['items'][-1])
+        delta = (now - last_post_date) + datetime.timedelta(seconds=10)
+        with override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=delta):
+            stream = self.stream.get_items(config=self.feedconfig,
+                                           query_string=q)
         self.assertIsNotNone(cache.get(cache_key))
         self.assertEqual(len(stream), 39)
         for s in stream:
@@ -250,8 +270,15 @@ class FacebookFeedTest(TestCase):
         cache_key = "{}:q-{}".format(self.cache_key, q)
 
         self.assertIsNone(cache.get(cache_key))
-        stream = self.stream.get_items(config=self.feedconfig,
-                                       query_string=q)
+        # Ensure we set the SEARCH_MAX_HISTORY big enough for both facebook
+        # pages to be included
+        now = datetime.datetime.now(tzutc())
+        last_post_date = FacebookFeedItem.get_post_date(page2['data'][-1])
+        delta = (now - last_post_date) + datetime.timedelta(seconds=10)
+        with override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=delta):
+            stream = self.stream.get_items(config=self.feedconfig,
+                                           query_string=q)
+
         self.assertIsNotNone(cache.get(cache_key))
         self.assertEqual(len(stream), 2)
         for s in stream:

@@ -9,27 +9,26 @@ from . import AbstractFeed, AbstractFeedQuery, FeedError, FeedItem
 logger = logging.getLogger('wagtailsocialfeed')
 
 
-def _raw_timestamp_to_date(ts):
-    timestamp = None
-    try:
-        timestamp = float(ts)
-    except ValueError:
-        return None
-
-    return timezone.make_aware(
-        datetime.datetime.fromtimestamp(timestamp), timezone=timezone.utc)
-
-
 class InstagramFeedItem(FeedItem):
     """Implements instagram-specific behaviour"""
 
     @classmethod
-    def from_raw(cls, raw):
-        date = None
-        image = {}
-
+    def get_post_date(cls, raw):
         if 'created_time' in raw:
-            date = _raw_timestamp_to_date(raw['created_time'])
+            timestamp = None
+            try:
+                timestamp = float(raw['created_time'])
+            except ValueError:
+                return None
+
+            return timezone.make_aware(
+                datetime.datetime.fromtimestamp(timestamp), timezone=timezone.utc)
+
+        return None
+
+    @classmethod
+    def from_raw(cls, raw):
+        image = {}
 
         if 'images' in raw:
             image = {
@@ -44,17 +43,22 @@ class InstagramFeedItem(FeedItem):
             type='instagram',
             text=raw['caption']['text'],
             image_dict=image,
-            posted=date,
+            posted=cls.get_post_date(raw),
             original_data=raw,
         )
 
 
 class InstagramFeedQuery(AbstractFeedQuery):
-    def _search(self, item):
-        """Very basic search function"""
-        return self.query_string.lower() in item['caption']['text'].lower()
+    def _get_load_kwargs(self, oldest_post):
+        # Trick from twitter API doc to exclude the oldest post from
+        # the next result-set
+        return {'max_id': self.oldest_post['id']}
 
-    def __call__(self, max_id=None):
+    def _search(self, raw_item):
+        """Very basic search function"""
+        return self.query_string.lower() in raw_item['caption']['text'].lower()
+
+    def _load(self, max_id=None):
         url = "https://www.instagram.com/{}/media/".format(self.username)
         if max_id:
             url += "?max_id={}".format(max_id)
@@ -62,28 +66,14 @@ class InstagramFeedQuery(AbstractFeedQuery):
         resp = requests.get(url)
         if resp.status_code == 200:
             try:
-                raw = resp.json()['items']
+                return resp.json()['items']
             except ValueError as e:
                 raise FeedError(e)
             except KeyError as e:
                 raise FeedError("No items could be found in the response")
-
-            if not raw:
-                return raw, None
-
-            oldest_post = raw[-1]
-            if self.query_string:
-                raw = list(filter(self._search, raw))
-            return raw, oldest_post
         raise FeedError(resp.reason)
 
 
 class InstagramFeed(AbstractFeed):
     item_cls = InstagramFeedItem
     query_cls = InstagramFeedQuery
-
-    def get_post_date(self, item):
-        return _raw_timestamp_to_date(item['created_time'])
-
-    def fetch_older_items(self, query, oldest_post):
-        return query(max_id=oldest_post['id'])

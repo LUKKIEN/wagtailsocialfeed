@@ -19,16 +19,19 @@ if not settings:
 
 class TwitterFeedItem(FeedItem):
     @classmethod
+    def get_post_date(cls, raw):
+        # Use the dateutil parser because on some platforms
+        # python's own strptime doesn't support the %z directive.
+        # Format: '%a %b %d %H:%M:%S %z %Y'
+        return dateparser.parse(raw.get('created_at'))
+
+    @classmethod
     def from_raw(cls, raw):
         image = None
         extended = raw.get('extended_entities', None)
         if extended:
             image = process_images(extended.get('media', None))
-
-        # Use the dateutil parser because on some platforms
-        # python's own strptime doesn't support the %z directive.
-        # Format: '%a %b %d %H:%M:%S %z %Y'
-        date = dateparser.parse(raw.get('created_at'))
+        date = cls.get_post_date(raw)
         return cls(
             id=raw['id'],
             type='twitter',
@@ -62,45 +65,25 @@ class TwitterFeedQuery(AbstractFeedQuery):
                                settings['ACCESS_TOKEN_KEY'],
                                settings['ACCESS_TOKEN_SECRET'])
 
-    def _search(self, tweet):
+    def _get_load_kwargs(self, oldest_post):
+        # Trick from twitter API doc to exclude the oldest post from
+        # the next result-set
+        return {'max_id': self.oldest_post['id'] - 1}
+
+    def _search(self, raw_item):
         """Very basic search function"""
-        return self.query_string.lower() in tweet['text'].lower()
+        return self.query_string.lower() in raw_item['text'].lower()
 
-    def __call__(self, max_id=None):
-        """
-        Return the raw data fetched from twitter and the oldest post in the
-        result set.
-
-        We return the oldest post as well because the raw data might be
-        filtered based on the query_string, but we still need the oldest
-        post to check the date to determine wether we should stop our
-        search or continue
-        """
-        raw = self.twitter.get_user_timeline(
+    def _load(self, max_id=None):
+        """Return the raw data fetched from twitter."""
+        return self.twitter.get_user_timeline(
             screen_name=self.username,
             trim_user=True,
             contributor_details=False,
             include_rts=False,
             max_id=max_id)
 
-        if not raw:
-            return raw, None
-
-        oldest_post = raw[-1]
-        if self.query_string:
-            raw = list(filter(self._search, raw))
-        return raw, oldest_post
-
 
 class TwitterFeed(AbstractFeed):
     item_cls = TwitterFeedItem
     query_cls = TwitterFeedQuery
-
-    def get_post_date(self, item):
-        return dateparser.parse(item.get('created_at'))
-
-    def fetch_older_items(self, query, oldest_post):
-        # Trick from twitter API doc to exclude the oldest post from
-        # the next result-set
-        max_id = oldest_post['id'] - 1
-        return query(max_id=max_id)

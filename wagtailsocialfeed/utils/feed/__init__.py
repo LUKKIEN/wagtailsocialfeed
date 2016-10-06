@@ -36,6 +36,10 @@ class FeedItem(object):
     def __repr__(self):
         return "{} ({} posted {})".format(self.__class__.__name__, self.id, self.posted)
 
+    @classmethod
+    def get_post_date(cls, raw):
+        raise NotImplementedError
+
     @property
     def image(self):
         """
@@ -93,13 +97,57 @@ class AbstractFeedQuery(object):
 
         older_tweets = query(max_id=<some id>)
     """
-
     def __init__(self, username, query_string):
         self.username = username
         self.query_string = query_string
 
-    def __call__(self, **kwargs):
-        raise NotImplementedError('The __call__ function needs to be implemented to provide the core functionality')
+        # Things needed for the paginator
+        self.exhausted = False
+        self.oldest_post = None
+
+    def get_paginator(self):
+        while not self.exhausted:
+            kwargs, result = {}, []
+            if self.oldest_post:
+                kwargs = self._get_load_kwargs(self.oldest_post)
+            try:
+                result, self.oldest_post = self.__load(**kwargs)
+            finally:
+                if not result:
+                    self.exhausted = True
+            yield result, self.oldest_post
+
+    def _get_load_kwargs(self, oldest_post):
+        """Get the kwargs needed to `self._load()` to get the correct results."""
+        return {}
+
+    def __load(self, **kwargs):
+        """Private method to load the raw results and the oldest post in the
+        result set.
+
+        We return the oldest post as well because the raw data might be
+        filtered based on the query_string, but we still need the oldest
+        post to check the date to determine wether we should stop our
+        search or continue
+
+        It will call the protected `_load()` method, perform
+        a search when needed and store the oldest post.
+        """
+        raw = self._load(**kwargs)
+
+        if not raw:
+            return raw, None
+
+        oldest_post = raw[-1]
+        if self.query_string:
+            raw = list(filter(self._search, raw))
+        return raw, oldest_post
+
+    def _search(self, raw_item):
+        raise NotImplementedError("_search() needs to be implemented by the subclas")
+
+    def _load(self, **kwargs):
+        raise NotImplementedError("_load() needs to be implemented by the subclass")
 
 
 class AbstractFeed(object):
@@ -175,22 +223,24 @@ class AbstractFeed(object):
             raise NotImplementedError('query_cls needs to be defined')
 
         query = self.query_cls(config.username, query_string)
-        raw, oldest_post = query()
-
+        paginator = query.get_paginator()
+        raw, oldest_post = next(paginator)
         if query_string:
             # If we have a query_string, we should fetch the users timeline a
             # couple of times to dig a bit into the history.
-            while oldest_post:
-                oldest_post_date = self.get_post_date(oldest_post)
+            for _raw, _oldest_post in paginator:
+                if not _raw:
+                    break
+
+                oldest_post_date = self._convert_raw_item(oldest_post).posted
                 if not self._more_history_allowed(oldest_post_date):
                     break
 
-                _raw, _post = self.fetch_older_items(query=query, oldest_post=oldest_post)
-                if _post and _post['id'] == oldest_post['id']:
+                if _oldest_post['id'] == oldest_post['id']:
                     logger.warning("Trying to fetch older items but received "
                                    "same result set. Breaking the loop.")
                     break
-                oldest_post = _post
+                oldest_post = _oldest_post
                 raw += _raw
 
         return raw
@@ -200,16 +250,3 @@ class AbstractFeed(object):
         item = self.item_cls.from_raw(raw)
         assert isinstance(item, FeedItem)
         return item
-
-    def get_post_date(self, item):
-        """Get the post date of a specific item"""
-        raise NotImplementedError("get_post_date needs to be implemented")
-
-    def fetch_older_items(self, query, oldest_post):
-        """
-        Fetch older items from the online source.
-
-        This needs to be implemented by the specific feed classes because the way pages
-        (or max_id arguments) differ between specific social media sources.
-        """
-        raise NotImplementedError("fetch_older_items needs to be implemented")

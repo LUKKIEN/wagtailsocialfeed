@@ -67,22 +67,15 @@ class FacebookFeedItem(FeedItem):
     """Implements facebook-specific behaviour."""
 
     @classmethod
+    def get_post_date(cls, raw):
+        if 'created_time' in raw:
+            return dateparser.parse(raw.get('created_time'))
+        return None
+
+    @classmethod
     def from_raw(cls, raw):
         item_type = PostType(raw['type'])
-        text = ""
-
-        if 'message' in raw:
-            text = raw['message']
-        elif 'story' in raw:
-            text = raw['story']
-
-        text = item_type.get_text_from(raw)
-
         image = {}
-
-        if 'created_time' in raw:
-            date = dateparser.parse(raw.get('created_time'))
-
         if 'picture' in raw:
             image = {
                 'thumb': {'url': raw['picture']},
@@ -90,12 +83,13 @@ class FacebookFeedItem(FeedItem):
                 # 'medium': raw['images']['standard_resolution'],
                 # 'largel': None,
             }
+
         return cls(
             id=raw['id'],
             type='facebook',
-            text=text,
+            text=item_type.get_text_from(raw),
             image_dict=image,
-            posted=date,
+            posted=cls.get_post_date(raw),
             original_data=raw,
         )
 
@@ -103,8 +97,8 @@ class FacebookFeedItem(FeedItem):
 class FacebookFeedQuery(AbstractFeedQuery):
     def __init__(self, username, query_string):
         super(FacebookFeedQuery, self).__init__(username, query_string)
-        settings = get_socialfeed_setting('CONFIG').get('facebook', None)
 
+        settings = get_socialfeed_setting('CONFIG').get('facebook', None)
         if not settings:
             raise ImproperlyConfigured(
                 "No facebook configuration defined in the settings. "
@@ -112,32 +106,20 @@ class FacebookFeedQuery(AbstractFeedQuery):
                 "settings with at least a 'facebook' entry.")
 
         graph = GraphAPI("{}|{}".format(settings['CLIENT_ID'], settings['CLIENT_SECRET']))
-        self.paginator = graph.get('{}/posts'.format(self.username), page=True)
+        self._paginator = graph.get('{}/posts'.format(self.username), page=True)
 
-    def _search(self, item):
+    def _search(self, raw_item):
         """Very basic search function"""
-        all_strings = " ".join([item.get('message', ''),
-                                item.get('story', ''),
-                                item.get('description', '')])
+        all_strings = " ".join([raw_item.get('message', ''),
+                                raw_item.get('story', ''),
+                                raw_item.get('description', '')])
         return self.query_string.lower() in all_strings.lower()
 
-    def __call__(self):
-        raw = next(self.paginator)
-        data = raw['data']
-        oldest_post = None
-        if data:
-            oldest_post = data[-1]
-            if self.query_string:
-                data = list(filter(self._search, data))
-        return data, oldest_post
+    def _load(self):
+        raw = next(self._paginator)
+        return raw['data']
 
 
 class FacebookFeed(AbstractFeed):
     item_cls = FacebookFeedItem
     query_cls = FacebookFeedQuery
-
-    def get_post_date(self, item):
-        return dateparser.parse(item.get('created_time'))
-
-    def fetch_older_items(self, query, oldest_post):
-        return query()
