@@ -24,7 +24,7 @@ matrix:
   - env: TOXENV=py27-dj18-wt16
     python: 2.7
 install:
-  - pip install -U tox
+  - pip install -U coveralls tox
 script:
   - tox
 after_success: coveralls
