@@ -11,3 +11,4 @@ Contributors
 ------------
 
 * Janneke Janssen
+* Mike Dingjan

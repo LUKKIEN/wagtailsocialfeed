@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.3.0 (XXXX.XX.XX)
+0.3.0 (2016.10.28)
 ==================
 + Added dimensions when returning the attached Twitter Image
 + Fixes Facebook support: initially developed on `2.1` while the GraphAPI assumes `2.8`.
