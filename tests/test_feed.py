@@ -70,12 +70,23 @@ class TwitterFeedTest(TestCase):
 
         self.assertEqual(stream[-1].image_dict['small']['url'],
                          base_url + ":small")
+        self.assertEqual(stream[-1].image_dict['small']['width'], 680)
+        self.assertEqual(stream[-1].image_dict['small']['height'], 546)
+
         self.assertEqual(stream[-1].image_dict['thumb']['url'],
                          base_url + ":thumb")
+        self.assertEqual(stream[-1].image_dict['thumb']['width'], 150)
+        self.assertEqual(stream[-1].image_dict['thumb']['height'], 150)
+
         self.assertEqual(stream[-1].image_dict['medium']['url'],
                          base_url + ":medium")
+        self.assertEqual(stream[-1].image_dict['medium']['width'], 1200)
+        self.assertEqual(stream[-1].image_dict['medium']['height'], 963)
+
         self.assertEqual(stream[-1].image_dict['large']['url'],
                          base_url + ":large")
+        self.assertEqual(stream[-1].image_dict['large']['width'], 2048)
+        self.assertEqual(stream[-1].image_dict['large']['height'], 1643)
 
         #The following data is not explicitly stored, but should still be accessible
         self.assertEqual(stream[0].in_reply_to_user_id, 1252591452)

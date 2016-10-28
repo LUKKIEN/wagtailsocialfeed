@@ -1,6 +1,6 @@
 from dateutil import parser as dateparser
 from django.core.exceptions import ImproperlyConfigured
-from facepy import GraphAPI, FacebookError
+from facepy import GraphAPI
 
 from wagtailsocialfeed.utils.conf import get_socialfeed_setting
 
@@ -106,13 +106,16 @@ class FacebookFeedQuery(AbstractFeedQuery):
                 "settings with at least a 'facebook' entry.")
 
         graph = GraphAPI("{}|{}".format(settings['CLIENT_ID'], settings['CLIENT_SECRET']))
-        self._paginator = graph.get('{}/posts'.format(self.username), page=True)
+        required_fields = get_socialfeed_setting('FACEBOOK_FIELDS')
+        self._paginator = graph.get('{}/posts?fields={}'.format(self.username, ','.join(required_fields)), page=True)
 
     def _search(self, raw_item):
         """Very basic search function"""
-        all_strings = " ".join([raw_item.get('message', ''),
-                                raw_item.get('story', ''),
-                                raw_item.get('description', '')])
+        all_strings = " ".join([
+            raw_item.get('message', ''),
+            raw_item.get('story', ''),
+            raw_item.get('description', '')
+        ])
         return self.query_string.lower() in all_strings.lower()
 
     def _load(self):

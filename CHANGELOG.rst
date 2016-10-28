@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+0.3.0 (XXXX.XX.XX)
+==================
++ Added dimensions when returning the attached Twitter Image
++ Fixes Facebook support: initially developed on `2.1` while the GraphAPI assumes `2.8`.
++ Added Facebook field configuration
++ Added Twitter options via default config
+
 0.2.0 (2016.10.06)
 ==================
 + Added Facebook support

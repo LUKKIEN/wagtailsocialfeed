@@ -47,12 +47,14 @@ def process_images(media_dict):
     if not media_dict:
         return images
     base_url = media_dict[0]['media_url_https']
+    sizes = media_dict[0]['sizes']
 
-    # TODO: see if we can provide the width and height attributes as well
-    images['small'] = dict(url=base_url + ":small")
-    images['thumb'] = dict(url=base_url + ":thumb")
-    images['medium'] = dict(url=base_url + ":medium")
-    images['large'] = dict(url=base_url + ":large")
+    for size in sizes:
+        images[size] = {
+            'url': '{0}:{1}'.format(base_url, size),
+            'width': sizes[size]['w'],
+            'height': sizes[size]['h'],
+        }
     return images
 
 
@@ -76,11 +78,12 @@ class TwitterFeedQuery(AbstractFeedQuery):
 
     def _load(self, max_id=None):
         """Return the raw data fetched from twitter."""
+        options = settings.get('OPTIONS', {})
         return self.twitter.get_user_timeline(
             screen_name=self.username,
-            trim_user=True,
-            contributor_details=False,
-            include_rts=False,
+            trim_user=options.get('trim_user', True),
+            contributor_details=options.get('contributor_details', False),
+            include_rts=options.get('include_rts', False),
             max_id=max_id)
 
 
