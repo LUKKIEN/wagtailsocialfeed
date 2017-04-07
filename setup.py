@@ -21,7 +21,7 @@ install_requires = [
 
 test_require = [
     'responses>=0.5',
-    'factory-boy>=2.7,<2.8',
+    'factory-boy>=2.8,<2.9',
     'beautifulsoup4>=4',
     'coverage>=3.7.0',
     'flake8>=2.2.0',
