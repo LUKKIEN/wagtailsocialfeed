@@ -13,8 +13,8 @@ Wagtail Social Feed
 .. image:: https://travis-ci.org/LUKKIEN/wagtailsocialfeed.svg?branch=master
     :target: https://travis-ci.org/LUKKIEN/wagtailsocialfeed
 
-.. image:: https://coveralls.io/repos/github/LUKKIEN/wagtailsocialfeed/badge.svg?branch=master
-    :target: https://coveralls.io/github/LUKKIEN/wagtailsocialfeed?branch=master
+.. image:: https://codecov.io/gh/LUKKIEN/wagtailsocialfeed/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/LUKKIEN/wagtailsocialfeed
 
 
 A Wagtail module that provides pages and content blocks to show social media feeds
