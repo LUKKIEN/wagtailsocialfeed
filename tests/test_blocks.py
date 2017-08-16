@@ -4,7 +4,7 @@ test_blocks
 
 Tests for `wagtailsocialfeed.blocks`.
 
-In Wagtail 1.8 Function accepting only one parameter and that's why its raising TypeError
+In Wagtail 1.8 the get_context accepts only one parameter and that's why its raising TypeError.
 In Combination of Django 1.11 and Wagtail 1.9, `ImportError` Exception is occurring in wagtailimage.
 
 from django.forms.widgets import flatatt
