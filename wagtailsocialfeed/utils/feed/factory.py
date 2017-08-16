@@ -1,8 +1,8 @@
-from .twitter import TwitterFeed, TwitterFeedItem
-from .instagram import InstagramFeed, InstagramFeedItem
-from .facebook import FacebookFeed, FacebookFeedItem
-
 from collections import namedtuple
+
+from .facebook import FacebookFeed, FacebookFeedItem
+from .instagram import InstagramFeed, InstagramFeedItem
+from .twitter import TwitterFeed, TwitterFeedItem
 
 FeedClasses = namedtuple('FeedClasses', ['feed', 'item'])
 

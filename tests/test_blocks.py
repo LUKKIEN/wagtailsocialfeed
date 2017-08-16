@@ -3,7 +3,17 @@ test_blocks
 ----------------------------------
 
 Tests for `wagtailsocialfeed.blocks`.
+
+In Wagtail 1.8 Function accepting only one parameter and that's why its raising TypeError
+In Combination of Django 1.11 and Wagtail 1.9, `ImportError` Exception is occurring in wagtailimage.
+
+from django.forms.widgets import flatatt
+ImportError: cannot import name flatatt
+
+because it's moved to utils
+
 """
+
 from __future__ import unicode_literals
 
 from django.test import RequestFactory, TestCase
@@ -63,3 +73,32 @@ class TestSocialFeedBlock(TestCase):
         self.assertEqual(
             soup.find(id='test-feedconfig').find_all('option')[1].text,
             'twitter (@wagtailcms)')
+
+    @feed_response('twitter')
+    def test_get_context_with_parent_context(self, tweets):
+        block = SocialFeedBlock()
+
+        value = {
+            'feedconfig': self.feedconfig,
+            'limit': 3
+        }
+        parent_context = {'has_parent': 'parent context'}
+
+        try:
+            context = block.get_context(value, parent_context)
+            self.assertEqual(context['has_parent'], parent_context['has_parent'])
+            # In Wagtail 1.8 Function accepting only one parameter and that's why its raising TypeError
+        except TypeError:
+            self.skipTest(TestSocialFeedBlock)
+
+    @feed_response('twitter')
+    def test_get_context_without_parent_context(self, tweets):
+        block = SocialFeedBlock()
+
+        value = {
+            'feedconfig': self.feedconfig,
+            'limit': 3
+        }
+
+        context = block.get_context(value)
+        self.assertEqual(context['value'], value)

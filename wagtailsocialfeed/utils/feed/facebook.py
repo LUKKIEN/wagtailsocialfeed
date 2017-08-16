@@ -1,11 +1,11 @@
+from enum import Enum
+
 from dateutil import parser as dateparser
 from django.core.exceptions import ImproperlyConfigured
 from facepy import GraphAPI
-
 from wagtailsocialfeed.utils.conf import get_socialfeed_setting
 
 from . import AbstractFeed, AbstractFeedQuery, FeedItem
-from enum import Enum
 
 
 class PostType(Enum):

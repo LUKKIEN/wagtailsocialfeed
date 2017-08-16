@@ -12,3 +12,4 @@ Contributors
 
 * Janneke Janssen
 * Mike Dingjan
+* Nazmul Hasan

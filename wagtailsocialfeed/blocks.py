@@ -48,11 +48,14 @@ class SocialFeedBlock(blocks.StructBlock):
         icon = 'icon icon-fa-rss'
         template = 'wagtailsocialfeed/social_feed_block.html'
 
-    def get_context(self, value):
-        context = super(SocialFeedBlock, self).get_context(value)
+    def get_context(self, value, parent_context=None):
+        if not parent_context:
+            context = super(SocialFeedBlock, self).get_context(value)
+        else:
+            context = super(SocialFeedBlock, self).get_context(value, parent_context)
 
         feedconfig = value['feedconfig']
-        feed = None
+
         if feedconfig:
             feed = get_feed_items(feedconfig, limit=value['limit'])
         else:

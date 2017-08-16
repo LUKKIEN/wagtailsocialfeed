@@ -2,16 +2,15 @@ from __future__ import unicode_literals
 
 from django.conf.urls import include, url
 from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
-
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 from wagtail.wagtailadmin.menu import Menu, MenuItem, SubmenuMenuItem
 from wagtail.wagtailcore import hooks
 
 from . import urls
 from .models import SocialFeedConfiguration
-from django.db.models.signals import post_save
 
 
 class SocialFeedConfigurationAdmin(ModelAdmin):
