@@ -139,7 +139,7 @@ def _tamper_date(resp):
     Alter instagram response so that it returns
     some unexpected data
     """
-    resp['items'][0]['created_time'] = "not_a_timestamp"
+    resp['user']['media']['nodes'][0]['date'] = "not_a_timestamp"
     return resp
 
 
@@ -162,61 +162,24 @@ class InstagramFeedTest(TestCase):
         stream = self.stream.get_items(config=self.feedconfig)
 
         self.assertIsNotNone(cache.get(self.cache_key))
-        self.assertEqual(len(stream), 20)
-
+        self.assertEqual(len(stream), 12)
         for item in stream:
             assert isinstance(item, FeedItem)
         self.assertEqual(
             stream[0].posted,
-            datetime.datetime(2016, 8, 17, 4, 31, 47, tzinfo=timezone.utc))
-
-        self.assertEqual(stream[0].image_dict['small']['url'],
-                         "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s320x320/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
+            datetime.datetime(2017, 11, 15, 21, 55, 44, tzinfo=timezone.utc))
+        self.assertEqual(stream[0].image_dict['small']['src'],
+                         "https://scontent-amt2-1.cdninstagram.com/t51.2885-15/s320x320/e35/c86.0.908.908/23507082_173663316554801_3781761610851287040_n.jpg" # NOQA
                          )
-        self.assertEqual(stream[0].image_dict['thumb']['url'],
-                         "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s150x150/e35/c136.0.448.448/14032893_1190601567673451_1118658827_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.c" # NOQA
+        self.assertEqual(stream[0].image_dict['thumb']['src'],
+                         "https://scontent-amt2-1.cdninstagram.com/t51.2885-15/s240x240/e35/c86.0.908.908/23507082_173663316554801_3781761610851287040_n.jpg" # NOQA
                          )
-        self.assertEqual(stream[0].image_dict['medium']['url'],
-                         "https://scontent-frt3-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/14026774_1163660323707262_1160471917_n.jpg?ig_cache_key=MTMxODUzMDUxMDQyNzYzNjA2Mg%3D%3D.2.l" # NOQA
+        self.assertEqual(stream[0].image_dict['medium']['src'],
+                         "https://scontent-amt2-1.cdninstagram.com/t51.2885-15/s480x480/e35/c86.0.908.908/23507082_173663316554801_3781761610851287040_n.jpg" # NOQA
                          )
 
         # The following data is not explicitly stored, but should still be accessible
-        self.assertEqual(stream[0].code, "BJMXINrjcFe")
-
-    @responses.activate
-    def test_search(self):
-        with open('tests/fixtures/instagram.json', 'r') as feed_file:
-            page1 = json.loads("".join(feed_file.readlines()))
-        with open('tests/fixtures/instagram.2.json', 'r') as feed_file:
-            page2 = json.loads("".join(feed_file.readlines()))
-
-        responses.add(
-            responses.GET,
-            re.compile('(?!.*max_id=\d*)https?://www.instagram.com.*'),
-            json=page1, status=200)
-
-        responses.add(
-            responses.GET,
-            re.compile('(?=.*max_id=\d*)https?://www.instagram.com.*'),
-            json=page2, status=200)
-
-        q = "programming"
-        cache_key = "{}:q-{}".format(self.cache_key, q)
-
-        self.assertIsNone(cache.get(cache_key))
-
-        # Ensure we set the SEARCH_MAX_HISTORY big enough for both instagram
-        # pages to be included
-        now = datetime.datetime.now(tzutc())
-        last_post_date = InstagramFeedItem.get_post_date(page2['items'][-1])
-        delta = (now - last_post_date) + datetime.timedelta(seconds=10)
-        with override_settings(WAGTAIL_SOCIALFEED_SEARCH_MAX_HISTORY=delta):
-            stream = self.stream.get_items(config=self.feedconfig,
-                                           query_string=q)
-        self.assertIsNotNone(cache.get(cache_key))
-        self.assertEqual(len(stream), 39)
-        for s in stream:
-            self.assertIn('programming', s.text)
+        self.assertEqual(stream[0].code, "Bbh7J7JlCRn")
 
     @feed_response('instagram', modifier=_tamper_date)
     def test_feed_unexpected_date_format(self, feed):

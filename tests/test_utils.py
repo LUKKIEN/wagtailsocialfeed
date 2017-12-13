@@ -23,7 +23,6 @@ class UtilTest(TestCase):
     @feed_response(['twitter', 'instagram'])
     def test_get_feed_items_mix(self, tweets, instagram_posts):
         items = get_feed_items_mix(SocialFeedConfiguration.objects.all())
-
         # There is only a twitter configuration, so should just return the twitter items
         self.assertEquals(len(items), len(tweets))
 

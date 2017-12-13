@@ -46,7 +46,7 @@ def _instagram(modifier):
                   re.compile('https?://www.instagram.com/.*'),
                   json=feed, status=200)
     try:
-        return feed['items']
+        return feed['user']['media']['nodes']
     except KeyError:
         return []
 

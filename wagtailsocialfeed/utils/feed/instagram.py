@@ -14,13 +14,12 @@ class InstagramFeedItem(FeedItem):
 
     @classmethod
     def get_post_date(cls, raw):
-        if 'created_time' in raw:
+        if 'date' in raw:
             timestamp = None
             try:
-                timestamp = float(raw['created_time'])
+                timestamp = float(raw['date'])
             except ValueError:
                 return None
-
             return timezone.make_aware(
                 datetime.datetime.fromtimestamp(timestamp), timezone=timezone.utc)
 
@@ -29,19 +28,23 @@ class InstagramFeedItem(FeedItem):
     @classmethod
     def from_raw(cls, raw):
         image = {}
-
-        if 'images' in raw:
+        caption = None
+        if 'display_src' in raw:
             image = {
-                'thumb': raw['images']['thumbnail'],
-                'small': raw['images']['low_resolution'],
-                'medium': raw['images']['standard_resolution'],
-                'large': None,
+                'thumb': raw['thumbnail_resources'][1],
+                'small': raw['thumbnail_resources'][2],
+                'medium': raw['thumbnail_resources'][3],
+                'large': raw['thumbnail_resources'][4],
+                'original_link': "https://www.instagram.com/p/" + raw['code']
             }
+
+        if 'caption' in raw:
+            caption = raw['caption']
 
         return cls(
             id=raw['id'],
             type='instagram',
-            text=raw['caption']['text'],
+            text=caption,
             image_dict=image,
             posted=cls.get_post_date(raw),
             original_data=raw,
@@ -56,17 +59,16 @@ class InstagramFeedQuery(AbstractFeedQuery):
 
     def _search(self, raw_item):
         """Very basic search function"""
-        return self.query_string.lower() in raw_item['caption']['text'].lower()
+        return self.query_string.lower() in raw_item
 
     def _load(self, max_id=None):
-        url = "https://www.instagram.com/{}/media/".format(self.username)
+        url = "https://www.instagram.com/{}/?__a=1".format(self.username)
         if max_id:
             url += "?max_id={}".format(max_id)
-
         resp = requests.get(url)
         if resp.status_code == 200:
             try:
-                return resp.json()['items']
+                return resp.json()['user']['media']['nodes']
             except ValueError as e:
                 raise FeedError(e)
             except KeyError as e:
