@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.4.1 (13-12-2017)
+==================
+* Fix on Instagram feed which was no longer available
+
 0.4.0 (16-08-2017)
 ==================
 + Dropped support for Wagtail 1.6, 1.7
